@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import router from "./router";
-// import routerAdmin from "./routerAdmin";
+import routerAdmin from "./routerAdmin";
 import morgan from "morgan";
 import { MORGAN_FORMAT } from "../src/libs/config";
 
@@ -15,6 +15,6 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use("/", router);
-// app.use("/admin", routerAdmin);
+app.use("/admin", routerAdmin);
 
 export default app;
