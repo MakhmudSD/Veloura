@@ -7,11 +7,11 @@ import barberController from "../src/controllers/barber.controller";
 routerAdmin.get("/", barberController.goHome);
 routerAdmin
   .get("/signup", barberController.getSignup)
-  .post("/signup", barberController.processSignup);
+  .post("/signup", barberController.signup);
 
 routerAdmin
 .get("/login", barberController.getLogin)
-// .post("/login", barberController.processLogin);
+.post("/login", barberController.login);
 
 
 export default routerAdmin;

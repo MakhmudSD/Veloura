@@ -1,18 +1,17 @@
 import MemberModel from "../schema/Member.model";
-import {MemberInput, LoginInput, Member} from "../libs/types/members"
+import { MemberInput, LoginInput, Member } from "../libs/types/members";
 import { MemberType } from "../libs/enums/members.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import * as bcrypt from "bcryptjs";
 
 class MemberService {
-
   private readonly memberModel;
 
   constructor() {
     this.memberModel = MemberModel;
   }
 
-  public async processSignup(input: MemberInput): Promise<Member> {
+  public async signup(input: MemberInput): Promise<Member> {
     const exist = await this.memberModel
       .findOne({ memberType: MemberType.BARBER })
       .exec();
@@ -27,28 +26,42 @@ class MemberService {
     try {
       const result = await this.memberModel.create(input);
       result.memberPassword = "";
-      return result.toObject() as Member
+      return result.toObject() as unknown as Member;
     } catch (err) {
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
   }
 
+  public async login(input: LoginInput): Promise<Member> {
+    // Use await to get the resolved member document
+    const member = await this.memberModel
+      .findOne(
+        { memberNick: input.memberNick },
+        { memberNick: 1, memberPassword: 1 }
+      )
+      .exec();
 
-  // public async processLogin(input: LoginInput): Promise<Member> {
-  //   const member = this.memberModel
-  //     .findOne(
-  //       { memberNick: input.memberNick },
-  //       { memberNick: 1, memberPassword: 1 }
-  //     )
-  //     .exec();
-  //     if(!member) throw new Errors(HttpCode.UNAUTHORIZED, Message.NO_MEMBER_NICK)
+    if (!member) {
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.NO_MEMBER_NICK);
+    }
 
-  //       const isMatch = await bcrypt.compare(input.memberPassword, member.memberPassword);
-  //       if(!isMatch) {throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD)
-          
-  //       };
-  //       const result = await this.memberModel.findById(member._id).lean().exec();
-  //       return result as Member
-  // }
+  //   // Use await for bcrypt.compare with memberPassword
+  if (!member.memberPassword) {
+    throw new Error("Password is undefined");
+}
+    console.log("Password value:", member.memberPassword);
+    const isMatch = await bcrypt.compare(
+      input.memberPassword,
+      member.memberPassword
+    );
+    if (!isMatch) {
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
+    }
+    
+
+    // Fetch the full member document after password check
+    const result = await this.memberModel.findById(member._id).lean().exec();
+    return result as unknown as Member;
+  }
 }
 export default MemberService;
