@@ -11,6 +11,8 @@ class MemberService {
     this.memberModel = MemberModel;
   }
 
+  /** SSR */
+
   public async signup(input: MemberInput): Promise<Member> {
     const exist = await this.memberModel
       .findOne({ memberType: MemberType.BARBER })
@@ -33,7 +35,6 @@ class MemberService {
   }
 
   public async login(input: LoginInput): Promise<Member> {
-    // Use await to get the resolved member document
     const member = await this.memberModel
       .findOne(
         { memberNick: input.memberNick },
@@ -45,10 +46,9 @@ class MemberService {
       throw new Errors(HttpCode.UNAUTHORIZED, Message.NO_MEMBER_NICK);
     }
 
-  //   // Use await for bcrypt.compare with memberPassword
-  if (!member.memberPassword) {
-    throw new Error("Password is undefined");
-}
+    if (!member.memberPassword) {
+      throw new Error("Password is undefined");
+    }
     console.log("Password value:", member.memberPassword);
     const isMatch = await bcrypt.compare(
       input.memberPassword,
@@ -57,11 +57,54 @@ class MemberService {
     if (!isMatch) {
       throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     }
-    
 
-    // Fetch the full member document after password check
     const result = await this.memberModel.findById(member._id).lean().exec();
     return result as unknown as Member;
   }
-}
+
+  /** SPA */
+
+  public async processSignup(input: MemberInput): Promise<Member> {
+    const salt = await bcrypt.genSalt();
+    input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
+
+    try {
+      const result = await this.memberModel.create(input);
+      result.memberPassword = "";
+      return result.toJSON() as unknown as Member;
+    } catch (err) {
+      console.log("ERROR on model: signup", err);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+    }
+  }
+
+
+  public async processLogin(input: LoginInput): Promise<Member> {
+    const member = await this.memberModel
+      .findOne(
+        { memberNick: input.memberNick },
+        { memberNick: 1, memberPassword: 1 }
+      )
+      .exec();
+
+    if (!member) {
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.NO_MEMBER_NICK);
+    }
+
+    if (!member.memberPassword) {
+      throw new Error("Password is undefined");
+    }
+    const isMatch = await bcrypt.compare(
+      input.memberPassword,
+      member.memberPassword
+    );
+    if (!isMatch) {
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
+    }
+
+    const result = await this.memberModel.findById(member._id).lean().exec();
+    return result as unknown as Member;
+  }
+};
+
 export default MemberService;

@@ -20,6 +20,7 @@ export enum HttpCode {
   }
   
   class Errors extends Error {
+ 
     public code: HttpCode;
     public message: Message;
   

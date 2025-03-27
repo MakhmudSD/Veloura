@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import {T} from "../libs/types/common";
-import { Member, MemberInput } from "../libs/types/members";
+import { MemberInput } from "../libs/types/members";
 import { MemberType } from "../libs/enums/members.enum";
 import MemberService from "../models/Member.service";
 
@@ -10,7 +10,7 @@ const barberController: T = {};
 barberController.goHome = (req: Request, res: Response) => {
   {
     try {
-      res.send("Homepage");
+      res.render("home");
     } catch (err) {
       console.log("ERROR on Homepage");
     }
@@ -20,7 +20,7 @@ barberController.goHome = (req: Request, res: Response) => {
 barberController.getSignup = (req: Request, res: Response) => {
     {
       try {
-        res.send("Signup");
+        res.render("signup");
       } catch (err) {
         console.log("ERROR on Signup");
       }
@@ -30,7 +30,7 @@ barberController.getSignup = (req: Request, res: Response) => {
   barberController.getLogin = (req: Request, res: Response) => {
     {
       try {
-        res.send("Login");
+        res.render("login");
       } catch (err) {
         console.log("ERROR on Login");
       }
@@ -39,7 +39,7 @@ barberController.getSignup = (req: Request, res: Response) => {
 
   barberController.signup = async(req: Request, res: Response) => {
     try {
-      console.log("processSignup")
+      console.log("signup")
       console.log("body", req.body);
 
       const newMember: MemberInput = req.body;
@@ -56,7 +56,7 @@ barberController.getSignup = (req: Request, res: Response) => {
 
   barberController.login = async(req: Request, res: Response) => {
     try {
-      console.log("processSignup")
+      console.log("login")
       console.log("body", req.body);
 
       const newMember: MemberInput = req.body;
