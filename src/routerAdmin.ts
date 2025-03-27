@@ -13,6 +13,11 @@ routerAdmin
 .get("/login", barberController.getLogin)
 .post("/login", barberController.login);
 
+routerAdmin.get("/logout", barberController.logout);
+routerAdmin.get("/check-me", barberController.checkAuthSession);
+
+
+
 
 export default routerAdmin;
 
