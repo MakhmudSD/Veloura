@@ -18,15 +18,13 @@ productController.getAllProducts = async (req: Request, res: Response) => {
 };
 
 productController.createNewProduct = async (req: Request, res: Response) => {
-  {
-    try {
-      console.log("createNewProduct");
-      res.send("File Uploaded Successfully");
-    } catch (err) {
-      console.log("ERROR on createNewProduct");
-      if (err instanceof Errors) res.status(err.code).json(err);
-      else res.status(Errors.standard.code).json(Errors.standard);
-    }
+  try {
+    console.log("createNewProduct");
+    res.send("File Uploaded Successfully!!!");
+  } catch (err) {
+    console.log("ERROR on createNewProduct:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
   }
 };
 
