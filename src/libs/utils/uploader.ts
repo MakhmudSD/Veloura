@@ -1,6 +1,6 @@
 import path from "path";
 import multer from "multer";
-import { v4 as uuidv4 } from "uuid";
+import { v4 } from "uuid";
 import fs from "fs";
 
 function getTargetImageStorage(address: string) {
@@ -16,8 +16,8 @@ function getTargetImageStorage(address: string) {
       cb(null, uploadPath);
     },
     filename: function (req, file, cb) {
-      const extension = path.extname(file.originalname);
-      const randomName = uuidv4() + extension;
+      const extension = path.parse(file.originalname).ext
+      const randomName = v4() + extension;
       cb(null, randomName);
     },
   });
