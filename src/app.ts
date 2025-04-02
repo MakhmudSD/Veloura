@@ -3,7 +3,7 @@ import path from "path";
 import router from "./router";
 import routerAdmin from "./routerAdmin";
 import morgan from "morgan";
-import { MORGAN_FORMAT } from "./libs/config"
+import { MORGAN_FORMAT } from "./libs/config";
 import ConnectMongoDB from "connect-mongodb-session";
 import session from "express-session";
 import { T } from "./libs/types/common";
@@ -29,6 +29,7 @@ app.use(
     store: store,
     resave: true,
     saveUninitialized: true,
+    
   })
 );
 
@@ -37,7 +38,6 @@ app.use(function (req, res, next) {
   res.locals.member = sessionInstance.member;
   next();
 });
-
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
