@@ -7,6 +7,7 @@ import { Message } from "../libs/Errors";
 
 const memberService = new MemberService();
 const barberController: T = {};
+
 barberController.goHome = (req: Request, res: Response) => {
   {
     try {
