@@ -17,7 +17,6 @@ const productSchema = new Schema(
 
     productName: {
       type: String,
-      required: true,
     },
 
     productPrice: {
@@ -45,11 +44,10 @@ const productSchema = new Schema(
 
     productDesc: {
       type: String,
-      required: true,
     },
 
     productImages: {
-      type: { String },
+      type: [ String ],
       default: [],
     },
 
