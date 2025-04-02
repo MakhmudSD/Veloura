@@ -35,7 +35,7 @@ routerAdmin
     productController.createNewProduct
   )
   .post(
-    "/product/update",
+    "/product/:id",
     barberController.verifyBarber,
     productController.updateChosenProduct
   );
