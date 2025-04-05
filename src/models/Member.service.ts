@@ -1,8 +1,9 @@
 import MemberModel from "../schema/Member.model";
-import { MemberInput, LoginInput, Member } from "../libs/types/members";
+import { MemberInput, LoginInput, Member, MemberUpdateInput } from "../libs/types/members";
 import { MemberType } from "../libs/enums/members.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import * as bcrypt from "bcryptjs";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 
 class MemberService {
   private readonly memberModel;
@@ -13,7 +14,7 @@ class MemberService {
 
   /** SSR */
 
-  public async signup(input: MemberInput): Promise<Member> {
+  public async processSignup(input: MemberInput): Promise<Member> {
     const exist = await this.memberModel
       .findOne({ memberType: MemberType.BARBER })
       .exec();
@@ -34,7 +35,7 @@ class MemberService {
     }
   }
 
-  public async login(input: LoginInput): Promise<Member> {
+  public async processLogin(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
       .findOne(
         { memberNick: input.memberNick },
@@ -64,7 +65,7 @@ class MemberService {
 
   /** SPA */
 
-  public async processSignup(input: MemberInput): Promise<Member> {
+  public async signup(input: MemberInput): Promise<Member> {
     const salt = await bcrypt.genSalt();
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
 
@@ -78,8 +79,7 @@ class MemberService {
     }
   }
 
-
-  public async processLogin(input: LoginInput): Promise<Member> {
+  public async login(input: LoginInput): Promise<Member> {
     const member = await this.memberModel
       .findOne(
         { memberNick: input.memberNick },
@@ -103,6 +103,22 @@ class MemberService {
     }
 
     const result = await this.memberModel.findById(member._id).lean().exec();
+    return result as unknown as Member;
+  }
+
+  public async getUsers(): Promise<Member> {
+    const result = await this.memberModel
+      .find({ memberType: MemberType.USER })
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result as unknown as Member;
+  }
+
+  public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {
+    const memberId = shapeIntoMongooseObjectId(input._id)
+    const result = await this.memberModel
+      .findByIdAndUpdate({_id: memberId}, input, {new: true})
+    if(!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED)
     return result as unknown as Member;
   }
 };
