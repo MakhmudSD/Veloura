@@ -3,7 +3,7 @@ import { T } from "../libs/types/common";
 import { AdminRequest, MemberInput, LoginInput } from "../libs/types/members";
 import { MemberType } from "../libs/enums/members.enum";
 import MemberService from "../models/Member.service";
-import { Message } from "../libs/Errors";
+import Errors, { HttpCode, Message } from "../libs/Errors";
 
 const memberService = new MemberService();
 const barberController: T = {};
@@ -89,6 +89,34 @@ barberController.logout = async (req: AdminRequest, res: Response) => {
     res.redirect("/admin");
   }
 };
+
+barberController.getUsers = async (req: Request, res: Response) => {
+  {
+    try {
+      console.log("getUsers");
+      const result = await memberService.getUsers();
+      res.render("users", { users: result });
+    } catch (err) {
+      console.log("ERROR on Login");
+      res.redirect("/admin/login");
+    }
+  }
+};
+
+barberController.updateChosenUser = async (req: Request, res: Response) => {
+  {
+    try {
+      console.log("updateChosenUser");
+      const result = await memberService.updateChosenUser(req.body);
+      res.status(HttpCode.OK).json({ data: result });
+    } catch (err) {
+      console.log("ERROR on updateChosenUser:", err);
+      if (err instanceof Errors) res.status(err.code).json(err);
+      else res.status(Errors.standard.code).json(Errors.standard);
+    }
+  }
+};
+
 
 barberController.checkAuthSession = async (
   req: AdminRequest,
