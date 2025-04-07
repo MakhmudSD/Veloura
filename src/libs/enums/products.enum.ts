@@ -1,4 +1,4 @@
-export enum ProductSize {
+export enum ProductStyle {
     BASIC = "BASIC",
     STANDARD = "STANDARD",
     PREMIUM = "PREMIUM",
@@ -26,3 +26,10 @@ export enum ProductSize {
     OTHERS = "OTHERS",
   }
   
+export enum ProductSize {
+  SMALL = 'Small',
+  MEDIUM = 'Medium',
+  LARGE = 'Large',
+  XL = 'Extra Large',
+  TRAVEL = 'Travel Size',
+}
