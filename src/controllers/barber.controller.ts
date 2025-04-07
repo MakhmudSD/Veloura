@@ -70,7 +70,7 @@ barberController.login = async (req: AdminRequest, res: Response) => {
     const result = await memberService.login(newMember);
     req.session.member = result;
     req.session.save(function () {
-      res.send(result);
+      res.render("products", {data: result})
     });
   } catch (err) {
     console.log("Error on login", err);
