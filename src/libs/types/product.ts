@@ -2,8 +2,9 @@ import mongoose, { ObjectId } from "mongoose";
 
 import {
 ProductCategory,
-  ProductSize,
+  ProductStyle,
   ProductStatus,
+  ProductDuration
 } from "../enums/products.enum";
 
 export interface Product {
@@ -12,8 +13,8 @@ export interface Product {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productLeftCount: number;
-  productSize: ProductSize;
+  productDuration: ProductDuration;
+  productStyle: ProductStyle;
   productVolume: number;
   productDesc?: string;
   productImages: string[];
@@ -25,8 +26,8 @@ export interface ProductInput {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productLeftCount: number;
-  productSize?: ProductSize;
+  productDuration: ProductDuration;
+  productStyle?: ProductStyle;
   productVolume?: number;
   productDesc?: string;
   productImages: string[];
@@ -39,8 +40,8 @@ export interface ProductUpdateInput {
   productCollection?: ProductCategory;
   productName?: string;
   productPrice?: number;
-  productLeftCount?: number;
-  productSize?: ProductSize;
+  productDuration: ProductDuration;
+  productStyle?: ProductStyle;
   productVolume?: number;
   productDesc?: string;
   productImages?: string[];
