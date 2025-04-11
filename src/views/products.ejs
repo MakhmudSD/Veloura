@@ -42,22 +42,22 @@
                 <th scope="col">Status</th>
               </tr>
             </thead>
-            <!--  LOOP PRODUCTS: START  -->
-            <tbody style="background: white">
-              <td>1</td>
-              <td>HAIRCUT</td>
-              <td>STANDARD</td>
-              <td>15</td>
-              <td>VIP</td>
-              <td>
-                <select class="spec-select new-product-status">
-                  <option value="PAUSE" selected>PAUSE</option>
-                  <option value="PROCESS">PROCESS</option>
-                  <option value="DELETE">DELETE</option>
-                </select>
-              </td>
-            </tbody>
-            <!--  LOOP PRODUCTS: END  -->
+            <% products.map(function(value, key) { %>
+              <tbody style="background: white">
+                <td><%= key + 1 %> </td>
+                <td><%= value.productCategory %> </td>
+                <td><%= value.productStyle %></td>
+                <td><%= value.productPrice %></td>
+                <td><%= value.productDuration %></td>
+                <td>
+                  <select class="spec-select new-product-status" id="<%= value._id%>">
+                    <option value="PAUSE" "<%=value.productStatus === "PAUSE" ? "selected" : "" %>">PAUSE</option>
+                    <option value="PROCESS" <%=value.productStatus === "PROCESS" ? "selected" : "" %>>PROCESS</option>
+                    <option value="DELETE" <%=value.productStatus === "DELETE" ? "selected" : "" %>>DELETE</option>
+                  </select>
+                </td>
+              </tbody>
+              <% }) %>
           </table>
           <div
             class="long-input"
