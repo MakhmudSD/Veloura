@@ -4,6 +4,7 @@ import {
   ProductStatus,
   ProductCategory,
   ProductSize,
+  ProductStyle,
 } from "../libs/enums/products.enum";
 
 // Build type: Schema First vs Code First
@@ -28,6 +29,12 @@ const productSchema = new Schema(
       type: String,
       enum: ProductSize,
       default: ProductSize.MEDIUM,
+    },
+
+    productStyle: {
+      type: String,
+      enum: ProductStyle,
+      default: ProductStyle.PREMIUM,
     },
 
     productCategory: {
