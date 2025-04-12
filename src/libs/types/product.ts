@@ -1,7 +1,7 @@
 import mongoose, { ObjectId } from "mongoose";
 
 import {
-ProductCategory,
+  ProductCategory,
   ProductStyle,
   ProductStatus,
 } from "../enums/products.enum";
@@ -14,7 +14,7 @@ export interface Product {
   productPrice: number;
   productDuration: number;
   productStyle: ProductStyle;
-  productVolume: number;
+  productColor: string;
   productDesc?: string;
   productImages: string[];
   productViews: number;
@@ -27,7 +27,7 @@ export interface ProductInput {
   productPrice: number;
   productDuration: number;
   productStyle?: ProductStyle;
-  productVolume?: number;
+  productColor?: string;
   productDesc?: string;
   productImages: string[];
   productViews: number;
@@ -41,7 +41,7 @@ export interface ProductUpdateInput {
   productPrice?: number;
   productDuration: number;
   productStyle?: ProductStyle;
-  productVolume?: number;
+  productColor?: string;
   productDesc?: string;
   productImages?: string[];
   productViews?: number;
