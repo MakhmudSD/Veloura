@@ -29,7 +29,7 @@
       <div class="board">
         <div class="dishes-table">
           <span class="new-dish-txt" style="margin-bottom: 30px">
-            BarberMaster MENU
+            BARBERMASTER MENU
           </span>
           <table class="table table-bordered table-hover">
             <thead class="thead-light">
@@ -51,9 +51,9 @@
                 <td><%= value.productDuration %></td>
                 <td>
                   <select class="spec-select new-product-status" id="<%= value._id%>">
-                    <option value="PAUSE" "<%=value.productStatus === "PAUSE" ? "selected" : "" %>">PAUSE</option>
+                    <option value="AVAILABLE" "<%=value.productStatus === "AVAILABLE" ? "selected" : "" %>">AVAILABLE</option>
                     <option value="PROCESS" <%=value.productStatus === "PROCESS" ? "selected" : "" %>>PROCESS</option>
-                    <option value="DELETE" <%=value.productStatus === "DELETE" ? "selected" : "" %>>DELETE</option>
+                    <option value="UNAVAILABLE" <%=value.productStatus === "UNAVAILABLE" ? "selected" : "" %>>UNAVAILABLE</option>
                   </select>
                 </td>
               </tbody>
@@ -69,6 +69,7 @@
           </div>
         </div>
         <form
+          onsubmit="return validateForm()"
           action="/admin/product/create"
           method="POST"
           class="dish-container"
@@ -89,7 +90,7 @@
             </div>
             <input
               name="productStatus"
-              value="PAUSE"
+              value="AVAILABLE"
               class="product-status"
               hidden
             />
@@ -116,34 +117,34 @@
           </div>
           <div class="half-input-frame">
             <div class="half-input">
-              <label>Product Type</label>
-              <select class="product-collection" name="productCollection">
-                <option value="DISH" selected>Dish</option>
-                <option value="SALAD">Salad</option>
-                <option value="DESSERT">Dessert</option>
-                <option value="DRINK">Drink</option>
-                <option value="OTHER">Other</option>
+              <label>Product Category</label>
+              <select class="product-category" name="productCategory">
+                <option value="HAIRCUT" selected>HAIRCUT</option>
+                <option value="BEARD_TRIM">BEARD_TRIM</option>
+                <option value="COLORING">COLORING</option>
+                <option value="FACIAL">FACIAL</option>
+                <option value="OTHERS">OTHERS</option>
               </select>
             </div>
 
-            <div class="half-input" id="product-collection">
-              <label>Dish Volume</label>
-              <select class="product-size" name="productSize">
-                <option value="SMALL">Small</option>
-                <option value="NORMAL" selected>Normal</option>
-                <option value="LARGE">Large</option>
-                <option value="SET">Set</option>
+            <div class="half-input" id="product-style">
+              <label>Product Style</label>
+              <select class="product-style" name="productStyle">
+                <option value="BASIC">BASIC</option>
+                <option value="STANDARD" selected>STANDARD</option>
+                <option value="PREMIUM">PREMIUM</option>
+                <option value="PACKAGE">PACKAGE</option>
               </select>
             </div>
 
-            <div class="half-input" id="product-volume" style="display: none">
-              <label>Drink Volume</label>
-              <select class="product-volume" name="productVolume">
-                <option value="0.5">0,5 liters</option>
-                <option value="1" selected>1 liters</option>
-                <option value="1.2">1,2 liters</option>
-                <option value="1.5">1,5 liters</option>
-                <option value="2">2 liters</option>
+            <div class="half-input" id="product-color" style="display: none">
+              <label>Product Color</label>
+              <select class="product-color" name="productColor">
+                <option value="RED">RED</option>
+                <option value="BLUE" selected>BLUE</option>
+                <option value="BLACK">BLACK</option>
+                <option value="BLONDE">BLONDE</option>
+                <option value="CUSTOMIZE">CUSTOMIZE</option>
               </select>
             </div>
           </div>
@@ -201,7 +202,6 @@
                   class="image-five"
                 />
               </div>
-              <input name="restaurantIid" class="restaurant-id" hidden />
             </div>
           </div>
 
