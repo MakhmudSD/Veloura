@@ -1,10 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 import {
-  ProductDuration,
   ProductStatus,
   ProductCategory,
-  ProductSize,
+  ProductPackageSize,
   ProductStyle,
+  // ProductDuration
 } from "../libs/enums/products.enum";
 
 // Build type: Schema First vs Code First
@@ -13,7 +13,7 @@ const productSchema = new Schema(
     productStatus: {
       type: String,
       enum: ProductStatus,
-      default: ProductStatus.IN_PROGRESS,
+      default: ProductStatus.PROCESS,
     },
 
     productName: {
@@ -25,10 +25,10 @@ const productSchema = new Schema(
       required: true,
     },
 
-    productSize: {
+    productPackageSize: {
       type: String,
-      enum: ProductSize,
-      default: ProductSize.MEDIUM,
+      enum: ProductPackageSize,
+      default: ProductPackageSize.MEDIUM,
     },
 
     productStyle: {
@@ -45,8 +45,6 @@ const productSchema = new Schema(
 
     productDuration: {
       type: String,
-      enum: ProductDuration,
-      default: ProductDuration.STANDARD,
     },
 
     productDesc: {
@@ -63,14 +61,13 @@ const productSchema = new Schema(
       default: 0,
     },
   },
-  { timestamps: true } // updatedAt, createdAt info
+  { timestamps: true, autoIndex: true  } // updatedAt, createdAt info
 );
 
 productSchema.index(
   {
-    Productategory: 1,
-    ProductSize: 1,
-    ProductDuration: 1,
+    productCategory: 1,
+    productPackageSize: 1,
   },
   { unique: true }
 );
