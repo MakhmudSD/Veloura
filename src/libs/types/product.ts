@@ -4,7 +4,6 @@ import {
 ProductCategory,
   ProductStyle,
   ProductStatus,
-  ProductDuration
 } from "../enums/products.enum";
 
 export interface Product {
@@ -13,7 +12,7 @@ export interface Product {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productDuration: ProductDuration;
+  productDuration: number;
   productStyle: ProductStyle;
   productVolume: number;
   productDesc?: string;
@@ -26,7 +25,7 @@ export interface ProductInput {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productDuration: ProductDuration;
+  productDuration: number;
   productStyle?: ProductStyle;
   productVolume?: number;
   productDesc?: string;
@@ -40,7 +39,7 @@ export interface ProductUpdateInput {
   productCollection?: ProductCategory;
   productName?: string;
   productPrice?: number;
-  productDuration: ProductDuration;
+  productDuration: number;
   productStyle?: ProductStyle;
   productVolume?: number;
   productDesc?: string;
