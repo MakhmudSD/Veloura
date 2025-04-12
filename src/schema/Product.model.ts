@@ -2,7 +2,6 @@ import mongoose, { Schema } from "mongoose";
 import {
   ProductStatus,
   ProductCategory,
-  ProductPackageSize,
   ProductStyle,
   // ProductDuration
 } from "../libs/enums/products.enum";
@@ -25,16 +24,16 @@ const productSchema = new Schema(
       required: true,
     },
 
-    productPackageSize: {
+    productColor: {
       type: String,
-      enum: ProductPackageSize,
-      default: ProductPackageSize.MEDIUM,
     },
+
 
     productStyle: {
       type: String,
       enum: ProductStyle,
       default: ProductStyle.PREMIUM,
+      required: true,
     },
 
     productCategory: {
@@ -62,14 +61,6 @@ const productSchema = new Schema(
     },
   },
   { timestamps: true, autoIndex: true  } // updatedAt, createdAt info
-);
-
-productSchema.index(
-  {
-    productCategory: 1,
-    productPackageSize: 1,
-  },
-  { unique: true }
 );
 
 export default mongoose.model("Product", productSchema);
