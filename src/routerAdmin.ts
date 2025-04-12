@@ -34,7 +34,7 @@ routerAdmin
   .post(
     "/product/create",
     barberController.verifyBarber,
-    makeUploader("products").array("productImages", 4),
+    makeUploader("products").array("productImages", 5),
     productController.createNewProduct
   )
   .post(
