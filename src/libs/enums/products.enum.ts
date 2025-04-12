@@ -5,18 +5,19 @@ export enum ProductStyle {
     PACKAGE = "PACKAGE",
   }
   
-  export enum ProductDuration {
-    SHORT = 0.5, // 30 minutes
-    STANDARD = 1, // 1 hour
-    EXTENDED = 1.5, // 1.5 hours
-    VIP = 2, // 2 hours
-  }
   
   export enum ProductStatus {
     AVAILABLE = "AVAILABLE",
-    IN_PROGRESS = "IN_PROGRESS",
+    PROCESS = "PROCESS",
     UNAVAILABLE = "UNAVAILABLE",
   }
+
+  // export enum ProductDuration {
+  //   HALF_HOUR = 30,  // 30 minutes
+  //   ONE_HOUR = 60,   // 1 hour
+  //   TWO_HOURS = 120, // 2 hours
+  //   VIP_TARIFF = 180 // 3 hours for VIP services
+  // }
   
   export enum ProductCategory {
     HAIRCUT = "HAIRCUT",
@@ -26,10 +27,10 @@ export enum ProductStyle {
     OTHERS = "OTHERS",
   }
   
-export enum ProductSize {
-  SMALL = 'Small',
-  MEDIUM = 'Medium',
-  LARGE = 'Large',
-  XL = 'Extra Large',
-  TRAVEL = 'Travel Size',
-}
+  export enum ProductPackageSize {
+    SMALL = 'SMALL',
+    MEDIUM = 'MEDIUM',
+    LARGE = 'LARGE',
+    XL = 'EXTRA LARGE',
+    TRAVEL = 'TRAVEL SIZE',
+  }
