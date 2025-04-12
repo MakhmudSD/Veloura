@@ -63,3 +63,26 @@ function validateForm() {
     return false; // restricts sending data to the backend
   } else return true;
 }
+
+function previewFileHandler(input, order) {
+    const imgClassName = input.className;
+    console.log("input", input);
+  
+    const file = $(`.${imgClassName}`).get(0).files[0], // gives detailed info about the file
+      fileType = file["type"],
+      validImageType = ["image/jpg", "image/jpeg", "image/png", "image/webp"]; // mimetype
+  
+    if (!validImageType.includes(fileType)) {
+      alert(
+        "Only JPEG, JPG, WEBP or PNG image files are allowed. Please try again"
+      );
+    } else {
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          $(`#image-section-${order}`).attr("src", reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  }
