@@ -2,8 +2,11 @@ import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { MemberInput, Member, LoginInput } from "../libs/types/members";
-import Errors from "../libs/Errors";
+import Errors, { HttpCode, Message } from "../libs/Errors";
+import AuthService from "../models/Auth.service";
+import { AUTH_TIMER } from "../libs/config";
 
+const authService = new AuthService();
 const memberService = new MemberService();
 const memberController: T = {};
 
@@ -15,9 +18,14 @@ memberController.signup = async (req: Request, res: Response) => {
 
       const input: MemberInput = req.body,
         result: Member = await memberService.signup(input);
-      // TODO: Tokens Authentication
+      const token = await authService.createToken(result);
 
-      res.json({ member: result });
+      res.cookie("accessToken", token, {
+        maxAge: AUTH_TIMER * 3600 * 1000,
+        httpOnly: false,
+      });
+      res.status(HttpCode.CREATED).json({ member: result, accessToken: token });
+
     } catch (err) {
       console.log("ERROR on Signup page", err);
       if (err instanceof Errors) res.status(err.code).json(err);
@@ -32,13 +40,35 @@ memberController.login = async (req: Request, res: Response) => {
       console.log("login here");
       const input: LoginInput = req.body,
         result: Member = await memberService.login(input);
+      const token = await authService.createToken(result);
 
-      res.json({ member: result });
+      res.cookie("accessToken", token, {
+        maxAge: AUTH_TIMER * 3600 * 1000,
+        httpOnly: false,
+      });
+      res.status(HttpCode.OK).json({ member: result, accessToken: token });
     } catch (err) {
       console.log("ERROR on Login page", err);
       if (err instanceof Errors) res.status(err.code).json(err);
       else res.status(Errors.standard.code).json(Errors.standard);
     }
+  }
+};
+
+memberController.verifyAuth = async (req: Request, res: Response) => {
+  try {
+    let member = null;
+    const token = req.cookies["accessToken"];
+    if (token) member = await authService.checkAuth(token);
+
+    if (!member)
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.NOT_AUTHENTICATED);
+
+    res.status(HttpCode.CREATED).json({ member: member });
+  } catch (err) {
+    console.log("ERROR on verifyAuth page", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
   }
 };
 
