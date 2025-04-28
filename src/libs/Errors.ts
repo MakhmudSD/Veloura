@@ -18,7 +18,8 @@ export enum HttpCode {
     NO_MEMBER_NICK = "No member with that nick or phone exists",
     WRONG_PASSWORD = "The password is invalid, please try again",
     NOT_AUTHENTICATED = "You are not authenticated, please try again",
-    BLOCKED_USER = "You have been blocked by admins. Please contact support"
+    BLOCKED_USER = "You have been blocked by admins. Please contact support",
+    TOKEN_CREATION_FAILED = "Token creation unsuccessful"
   }
   
   class Errors extends Error {
