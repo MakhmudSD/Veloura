@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/config";
 import ConnectMongoDB from "connect-mongodb-session";
 import session from "express-session";
+import cookieParser from "cookie-parser";
 import { T } from "./libs/types/common";
 
 const MongDbStore = ConnectMongoDB(session);
@@ -20,6 +21,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 
 // 2 Session
@@ -50,4 +52,5 @@ app.set("view engine", "ejs");
 app.use("/", router);
 app.use("/admin", routerAdmin);
 
-export default app;
+
+export default app
