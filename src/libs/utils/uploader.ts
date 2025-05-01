@@ -1,33 +1,24 @@
 import path from "path";
 import multer from "multer";
 import { v4 } from "uuid";
-import fs from "fs";
 
-function getTargetImageStorage(address: string) {
+function getTargetImageStorage(address: any) {
   return multer.diskStorage({
-    destination: function (req, file, cb) {
-      const uploadPath = path.join(__dirname, `../uploads/${address}`);
-
-      // Ensure the directory exists
-      if (!fs.existsSync(uploadPath)) {
-        fs.mkdirSync(uploadPath, { recursive: true });
-      }
-
-      cb(null, uploadPath);
+    destination: function (req, res, cb) {
+      cb(null, `./uploads/${address}`);
     },
     filename: function (req, file, cb) {
-      const extension = path.parse(file.originalname).ext
-      const randomName = v4() + extension;
-      cb(null, randomName);
+      console.log(file);
+      const extension = path.parse(file.originalname).ext;
+      const random_name = v4() + extension;
+      cb(null, random_name);
     },
   });
 }
+const makeUploader = (address: any) => {
+  const product_storage = getTargetImageStorage(address);
+  return multer({ storage: product_storage });
 
-const makeUploader = (address: string) => {
-  const productStorage = getTargetImageStorage(address);
-  return multer({
-    storage: productStorage,
-  });
 };
 
 export default makeUploader;
