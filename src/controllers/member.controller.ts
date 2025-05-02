@@ -116,6 +116,18 @@ memberController.getTopUsers = async (req: Request, res: Response) => {
   }
 };
 
+memberController.getBarber = async (req: Response, res: Response) => {
+  try {
+    console.log("getBarber here");
+    const result = await memberService.getBarber();
+    res.status(HttpCode.OK).json(result);
+  } catch (err) {
+    console.log("ERROR on getBarber page", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
+  }
+}
+
 memberController.verifyAuth = async (
   req: ExtendedRequest,
   res: Response,

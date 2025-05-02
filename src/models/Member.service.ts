@@ -94,7 +94,15 @@ class MemberService {
       .lean()
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-    return result as unknown as Member[]
+    return result as unknown as Member[];
+  }
+
+  public async getBarber(): Promise<Member> {
+    const result = await this.memberModel.findOne({
+      memberType: MemberType.BARBER,
+    });
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result as unknown as Member;
   }
 
   /** SSR */
