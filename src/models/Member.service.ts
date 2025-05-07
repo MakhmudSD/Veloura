@@ -4,7 +4,7 @@ import {
   LoginInput,
   Member,
   MemberUpdateInput,
-} from "../libs/types/members";
+} from "../libs/types/member";
 import { MemberStatus, MemberType } from "../libs/enums/members.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import * as bcrypt from "bcryptjs";
