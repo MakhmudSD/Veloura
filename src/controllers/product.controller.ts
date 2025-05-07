@@ -1,5 +1,5 @@
 import { ProductCategory } from "./../libs/enums/products.enum";
-import { AdminRequest, ExtendedRequest } from "../libs/types/members";
+import { AdminRequest, ExtendedRequest } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
