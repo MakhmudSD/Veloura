@@ -1,5 +1,5 @@
-import { ProductCategory } from './../libs/enums/products.enum';
-import { AdminRequest } from "../libs/types/members";
+import { ProductCategory } from "./../libs/enums/products.enum";
+import { AdminRequest, ExtendedRequest } from "../libs/types/members";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
@@ -32,6 +32,20 @@ productController.getProducts = async (req: Request, res: Response) => {
   }
 };
 
+productController.getProduct = async (req: ExtendedRequest, res: Response) => {
+  try {
+    console.log("getProduct here");
+    const { id } = req.params;
+    const memberId = req.member?._id ?? null;
+    const result = await productService.getProduct(memberId, id);
+    res.status(HttpCode.OK).json(result);
+  } catch (err) {
+    console.log("ERROR on getProduct", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
+  }
+};
+
 productController.getAllProducts = async (req: Request, res: Response) => {
   {
     try {
@@ -42,7 +56,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
       console.log("ERROR on getAllProducts", err);
       const message =
         err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-        res.send(`
+      res.send(`
           <script>
               alert("Succesfully created");
               window.location.replace("/admin/product/all");
@@ -51,8 +65,6 @@ productController.getAllProducts = async (req: Request, res: Response) => {
     }
   }
 };
-
-
 
 productController.createNewProduct = async (
   req: AdminRequest,
