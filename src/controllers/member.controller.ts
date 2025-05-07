@@ -7,7 +7,7 @@ import {
   LoginInput,
   ExtendedRequest,
   MemberUpdateInput,
-} from "../libs/types/members";
+} from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import AuthService from "../models/Auth.service";
 import { AUTH_TIMER } from "../libs/config";

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { T } from "../libs/types/common";
-import { AdminRequest, MemberInput, LoginInput } from "../libs/types/members";
+import { AdminRequest, MemberInput, LoginInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/members.enum";
 import MemberService from "../models/Member.service";
 import Errors, { HttpCode, Message } from "../libs/Errors";
