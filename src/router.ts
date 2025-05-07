@@ -28,7 +28,16 @@ router.get("/member/barber", memberController.getBarber);
 
 /** Product */
 
-router.get("/product/all", memberController.retrieveAuth, productController.getProducts)
+router.get(
+  "/product/all",
+  memberController.retrieveAuth,
+  productController.getProducts
+);
+router.get(
+  "/product/:id",
+  memberController.retrieveAuth,
+  productController.getProduct
+);
 
 /** Order */
 
