@@ -53,6 +53,7 @@ export interface AdminRequest extends Request {
 }
 
 export interface ExtendedRequest extends Request {
+  params: { id: any; };
   cookies: any;
   member: Member;
   file: Express.Multer.File;
