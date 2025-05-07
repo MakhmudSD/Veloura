@@ -1,0 +1,67 @@
+import { Order, OrderItem, OrderItemInput } from "../libs/types/order";
+import OrderModel from "../schema/Order.model";
+import OrderItemModel from "../schema/OrderItem.model";
+import MemberService from "./Member.service";
+import { Member } from "../libs/types/member";
+import { shapeIntoMongooseObjectId } from "../libs/config";
+import { HttpCode, Message } from "../libs/Errors";
+import Errors from "../libs/Errors";
+import { ObjectId } from "mongoose";
+
+class OrderService {
+  private readonly orderModel;
+  private readonly orderItemModel;
+  private readonly memberService;
+
+  constructor() {
+    this.orderItemModel = OrderItemModel;
+    this.orderModel = OrderModel;
+    this.memberService = new MemberService();
+  }
+
+  public async createOrder(
+    member: Member,
+    input: OrderItemInput[]
+  ): Promise<Order> {
+    const memberId = shapeIntoMongooseObjectId(member._id);
+    const amount = input.reduce((accumalator: number, item: OrderItemInput) => {
+      return accumalator + item.itemPrice * item.itemQuantity;
+    }, 0);
+    const delivery = amount < 100 ? 5 : 0;
+
+    try {
+      const newOrder = await this.orderModel.create({
+        orderTotal: amount + delivery,
+        orderDelivery: delivery,
+        memberId: memberId,
+      });
+
+      const orderId = newOrder.id;
+      await this.recordOrderItem(orderId, input);
+
+      return newOrder as unknown as Order;
+    } catch (err) {
+      console.log("ERROR on createOrder", err);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+    }
+  }
+
+  private async recordOrderItem(
+    orderId: ObjectId,
+    input: OrderItemInput[]
+  ): Promise<void> {
+    const promisedList = input.map(async (item: OrderItemInput) => {
+      item.orderId = orderId;
+      item.productId = shapeIntoMongooseObjectId(item.productId);
+      await this.orderItemModel.create(item);
+      return "INSERTED";
+    });
+
+    console.log("promisedList: ", promisedList);
+    const orderItemState = await Promise.all(promisedList);
+
+    console.log("orderItemState: ", orderItemState);
+  }
+}
+
+export default OrderService;
