@@ -16,7 +16,7 @@ const orderSchema = new Schema(
     orderStatus: {
       type: String,
       enum: Object.values(OrderStatus),
-      default: OrderStatus.PAUSE
+      default: OrderStatus.AVAILABLE
     },
 
     memberId: {
