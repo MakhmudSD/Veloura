@@ -6,59 +6,53 @@ import MemberService from "../models/Member.service";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 
 const memberService = new MemberService();
-const barberController: T = {};
+const adminController: T = {};
 
-barberController.goHome = (req: Request, res: Response) => {
-  {
-    try {
-      res.render("home");
-    } catch (err) {
-      console.log("ERROR on Homepage");
-      res.redirect("/admin");
-    }
+adminController.goHome = (req: Request, res: Response) => {
+  try {
+    res.render("home");
+  } catch (err) {
+    console.log("ERROR on Homepage");
+    res.redirect("/admin");
   }
 };
 
-barberController.getSignup = (req: Request, res: Response) => {
-  {
-    try {
-      res.render("signup");
-    } catch (err) {
-      console.log("ERROR on Signup");
-      res.redirect("/admin");
-    }
+adminController.getSignup = (req: Request, res: Response) => {
+  try {
+    res.render("signup");
+  } catch (err) {
+    console.log("ERROR on Signup");
+    res.redirect("/admin");
   }
 };
 
-barberController.getLogin = (req: Request, res: Response) => {
-  {
-    try {
-      res.render("login");
-    } catch (err) {
-      console.log("ERROR on Login");
-      res.redirect("/admin");
-    }
+adminController.getLogin = (req: Request, res: Response) => {
+  try {
+    res.render("login");
+  } catch (err) {
+    console.log("ERROR on Login");
+    res.redirect("/admin");
   }
 };
 
-barberController.signup = async (req: AdminRequest, res: Response) => {
+adminController.signup = async (req: AdminRequest, res: Response) => {
   try {
     console.log("signup");
     console.log("body", req.body);
 
     const newMember = req.body as unknown as MemberInput;
-    newMember.memberType = MemberType.BARBER;
+    newMember.memberType = MemberType.ADMIN;
 
     const result = await memberService.signup(newMember);
     req.session.member = result;
     req.session.save(function () {
-      res.redirect("/admin/product/all")
+      res.redirect("/admin/product/all");
     });
   } catch (err) {
     console.log("Error on signup", err);
     const message =
-    err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-  res.send(`
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`
       <script>
           alert("${message}");
           window.location.replace("/admin/signup");
@@ -67,7 +61,7 @@ barberController.signup = async (req: AdminRequest, res: Response) => {
   }
 };
 
-barberController.login = async (req: AdminRequest, res: Response) => {
+adminController.login = async (req: AdminRequest, res: Response) => {
   try {
     console.log("login");
     console.log("body", req.body);
@@ -77,13 +71,13 @@ barberController.login = async (req: AdminRequest, res: Response) => {
     const result = await memberService.login(newMember);
     req.session.member = result;
     req.session.save(function () {
-      res.redirect("/admin/product/all"); 
+      res.redirect("/admin/product/all");
     });
   } catch (err) {
     console.log("Error on login", err);
     const message =
-    err instanceof Errors ? err.message : Message.NOT_AUTHENTICATED;
-  res.send(`
+      err instanceof Errors ? err.message : Message.NOT_AUTHENTICATED;
+    res.send(`
       <script>
           alert("${message}");
           window.location.replace("/admin/login");
@@ -92,7 +86,7 @@ barberController.login = async (req: AdminRequest, res: Response) => {
   }
 };
 
-barberController.logout = async (req: AdminRequest, res: Response) => {
+adminController.logout = async (req: AdminRequest, res: Response) => {
   try {
     console.log("logout");
     req.session.destroy(function () {
@@ -104,7 +98,7 @@ barberController.logout = async (req: AdminRequest, res: Response) => {
   }
 };
 
-barberController.getUsers = async (req: Request, res: Response) => {
+adminController.getUsers = async (req: Request, res: Response) => {
   {
     try {
       console.log("getUsers");
@@ -117,7 +111,7 @@ barberController.getUsers = async (req: Request, res: Response) => {
   }
 };
 
-barberController.updateChosenUser = async (req: Request, res: Response) => {
+adminController.updateChosenUser = async (req: Request, res: Response) => {
   {
     try {
       console.log("updateChosenUser");
@@ -131,17 +125,13 @@ barberController.updateChosenUser = async (req: Request, res: Response) => {
   }
 };
 
-
-barberController.checkAuthSession = async (
-  req: AdminRequest,
-  res: Response
-) => {
+adminController.checkAuthSession = async (req: AdminRequest, res: Response) => {
   try {
     console.log("checkAuthSession");
     if (req.session?.member) {
-      res.send(`<script> alert("${req.session.member.memberNick}")</script`);
+      res.send(`<script> alert("${req.session.member.memberNick}")</script>`);
     } else {
-      res.send(`<script> alert("${Message.NOT_AUTHENTICATED}")</script`);
+      res.send(`<script> alert("${Message.NOT_AUTHENTICATED}")</script>`);
     }
   } catch (err) {
     console.log("Error on signup", err);
@@ -149,12 +139,12 @@ barberController.checkAuthSession = async (
   }
 };
 
-barberController.verifyBarber = async (
+adminController.verifyAdmin = async (
   req: AdminRequest,
   res: Response,
   next: NextFunction
 ) => {
-  if (req.session?.member?.memberType === MemberType.BARBER) {
+  if (req.session?.member?.memberType === MemberType.ADMIN) {
     req.member = req.session.member;
     next();
   } else {
@@ -165,4 +155,4 @@ barberController.verifyBarber = async (
   }
 };
 
-export default barberController;
+export default adminController;

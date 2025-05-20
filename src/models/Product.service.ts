@@ -85,15 +85,15 @@ class ProductService {
           .exec();
       }
     }
-    return result as unknown as Product;
+    return result as Product;
   }
 
   /** SSR */
 
-  public async getAllProducts(): Promise<Product> {
+  public async getAllProducts(): Promise<Product[]> {
     const result = await this.productModel.find().exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-    return result as unknown as Product;
+    return result as Product[];
   }
 
   public async createNewProduct(input: ProductInput): Promise<Product> {
@@ -102,7 +102,7 @@ class ProductService {
       return result as unknown as Product;
     } catch (err) {
       console.log("ERROR, model: createNewProduct", err);
-      throw new Errors(HttpCode.BAD_REQUEST, Message.NO_MEMBER_NICK);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
   }
 
@@ -110,9 +110,9 @@ class ProductService {
     id: string,
     input: ProductUpdateInput
   ): Promise<Product> {
-    id = shapeIntoMongooseObjectId(id);
+    const productId = shapeIntoMongooseObjectId(id);
     const result = await this.productModel
-      .findOneAndUpdate({ _id: id }, input, { new: true })
+      .findOneAndUpdate({ _id: productId }, input, { new: true })
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.UPDATE_FAILED);
     return result as unknown as Product;

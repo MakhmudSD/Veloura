@@ -1,58 +1,51 @@
 import express from "express";
 const routerAdmin = express.Router();
 
-import barberController from "../src/controllers/barber.controller";
+import adminController from "./controllers/admin.controller";
 import productController from "./controllers/product.controller";
 import makeUploader from "./libs/utils/uploader";
 
-// /** BarberMaster */
+/** Admin Authentication */
+routerAdmin.get("/", adminController.goHome);
+routerAdmin.get("/signup", adminController.getSignup);
+routerAdmin.post(
+  "/signup",
+  makeUploader("members").single("memberImage"),
+  adminController.signup
+);
+routerAdmin.get("/login", adminController.getLogin);
+routerAdmin.post("/login", adminController.login);
+routerAdmin.get("/logout", adminController.logout);
+routerAdmin.get("/check-me", adminController.checkAuthSession);
 
-routerAdmin.get("/", barberController.goHome);
+/** Product Management */
+routerAdmin.get(
+  "/product/all",
+  adminController.verifyAdmin,
+  productController.getAllProducts
+);
+routerAdmin.post(
+  "/product/create",
+  adminController.verifyAdmin,
+  makeUploader("products").array("productImages", 5),
+  productController.createNewProduct
+);
+routerAdmin.post(
+  "/product/:id",
+  adminController.verifyAdmin,
+  productController.updateChosenProduct
+);
 
-routerAdmin
-  .get("/signup", barberController.getSignup)
-  .post(
-    "/signup",
-    makeUploader("members").single("memberImage"),
-    barberController.signup // <-- fixed name
-  );
-
-routerAdmin
-  .get("/login", barberController.getLogin)
-  .post("/login", barberController.login); // <-- fixed name
-
-routerAdmin.get("/logout", barberController.logout);
-routerAdmin.get("/check-me", barberController.checkAuthSession);
-
-// Products
-routerAdmin
-  .get(
-    "/product/all",
-    barberController.verifyBarber,
-    productController.getAllProducts
-  )
-  .post(
-    "/product/create",
-    barberController.verifyBarber,
-    makeUploader("products").array("productImages", 5),
-    productController.createNewProduct
-  )
-  .post(
-    "/product/:id",
-    barberController.verifyBarber,
-    productController.updateChosenProduct
-  );
-
-// Users
+/** User Management */
 routerAdmin.get(
   "/user/all",
-  barberController.verifyBarber,
-  barberController.getUsers
+  adminController.verifyAdmin,
+  adminController.getUsers
 );
 routerAdmin.post(
   "/user/edit",
-  barberController.verifyBarber,
-  barberController.updateChosenUser
+  adminController.verifyAdmin,
+  adminController.updateChosenUser
 );
 
 export default routerAdmin;

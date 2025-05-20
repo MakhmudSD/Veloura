@@ -1,8 +1,7 @@
 import mongoose, { ObjectId } from "mongoose";
-
 import {
   ProductCategory,
-  ProductStyle,
+  ProductTier,
   ProductStatus,
 } from "../enums/products.enum";
 
@@ -12,12 +11,14 @@ export interface Product {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productDuration: number;
-  productStyle: ProductStyle;
-  productColor: string;
+  productLongevity?: number; // renamed from duration for clarity
+  productTier: ProductTier; // renamed for clarity
   productDesc?: string;
   productImages: string[];
   productViews: number;
+  productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
+  productVolumeMl?: number; // size in milliliters
+  productGender?: "male" | "female" | "unisex";
 }
 
 export interface ProductInquiry {
@@ -33,24 +34,28 @@ export interface ProductInput {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productDuration: number;
-  productStyle?: ProductStyle;
-  productColor?: string;
+  productLongevity?: number;
+  productTier?: ProductTier;
   productDesc?: string;
   productImages: string[];
   productViews: number;
+  productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
+  productVolumeMl?: number; // size in milliliters
+  productGender?: "male" | "female" | "unisex";
 }
 
 export interface ProductUpdateInput {
   _id: ObjectId;
   productStatus?: ProductStatus;
-  productCollection?: ProductCategory;
+  productCategory?: ProductCategory; // fixed typo here
   productName?: string;
   productPrice?: number;
-  productDuration: number;
-  productStyle?: ProductStyle;
-  productColor?: string;
+  productLongevity?: number;
+  productTier?: ProductTier;
   productDesc?: string;
   productImages?: string[];
   productViews?: number;
+  productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
+  productVolumeMl?: number; // size in milliliters
+  productGender?: "male" | "female" | "unisex";
 }

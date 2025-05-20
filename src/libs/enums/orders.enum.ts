@@ -1,5 +1,5 @@
 export enum OrderStatus {
     AVAILABLE = "AVAILABLE",
-    PROCESS = "PROCESS",
+    PROCESSING = "PROCESSING",
     UNAVAILABLE = "UNAVAILABLE",
 }

@@ -17,7 +17,7 @@ const memberService = new MemberService();
 const memberController: T = {};
 
 memberController.signup = async (req: Request, res: Response) => {
-  {
+
     try {
       console.log("signup here!");
       console.log("body", req.body);
@@ -36,11 +36,9 @@ memberController.signup = async (req: Request, res: Response) => {
       if (err instanceof Errors) res.status(err.code).json(err);
       else res.status(Errors.standard.code).json(Errors.standard);
     }
-  }
 };
 
 memberController.login = async (req: Request, res: Response) => {
-  {
     try {
       console.log("login here");
       const input: LoginInput = req.body,
@@ -56,7 +54,6 @@ memberController.login = async (req: Request, res: Response) => {
       console.log("ERROR on Login page", err);
       if (err instanceof Errors) res.status(err.code).json(err);
       else res.status(Errors.standard.code).json(Errors.standard);
-    }
   }
 };
 
@@ -65,7 +62,7 @@ memberController.logout = async (req: ExtendedRequest, res: Response) => {
     console.log("logout here");
     res.cookie("accessToken", null, {
       maxAge: 0,
-      httpOnly: true
+      httpOnly: true,
     });
     res.status(HttpCode.OK).json({ logout: true });
   } catch (err) {
@@ -94,7 +91,7 @@ memberController.updateMember = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("updateMember here");
     const input: MemberUpdateInput = req.body as unknown as MemberUpdateInput;
-    if (req.file) input.memberImage = req.file.path.replace(/\\/, "/");
+    if (req.file) input.memberImage = req.file.path.replace(/\\/g, "/");
     const result = await memberService.updateMember(req.member, input);
     res.status(HttpCode.OK).json(result);
   } catch (err) {
@@ -116,17 +113,17 @@ memberController.getTopUsers = async (req: Request, res: Response) => {
   }
 };
 
-memberController.getBarber = async (req: Response, res: Response) => {
+memberController.getAdmin = async (req: Request, res: Response) => {
   try {
-    console.log("getBarber here");
-    const result = await memberService.getBarber();
+    console.log("getAdmin here");
+    const result = await memberService.getAdmin();
     res.status(HttpCode.OK).json(result);
   } catch (err) {
-    console.log("ERROR on getBarber page", err);
+    console.log("ERROR on getAdmin page", err);
     if (err instanceof Errors) res.status(err.code).json(err);
     else res.status(Errors.standard.code).json(Errors.standard);
   }
-}
+};
 
 memberController.verifyAuth = async (
   req: ExtendedRequest,

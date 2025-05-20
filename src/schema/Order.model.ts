@@ -6,17 +6,21 @@ const orderSchema = new Schema(
     orderTotal: {
       type: Number,
       required: true,
+      min: 0,
     },
 
     orderDelivery: {
       type: Number,
       required: true,
+      min: 0,
     },
 
     orderStatus: {
       type: String,
       enum: Object.values(OrderStatus),
-      default: OrderStatus.AVAILABLE
+      default: OrderStatus.PROCESSING,
+      required: true,
+      trim: true,
     },
 
     memberId: {

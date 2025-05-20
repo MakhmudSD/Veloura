@@ -1,34 +1,34 @@
 import express from "express";
 const router = express.Router();
+
 import memberController from "../src/controllers/member.controller";
-import uploader from "./libs/utils/uploader";
 import productController from "./controllers/product.controller";
 import orderController from "./controllers/order.controller";
+import uploader from "./libs/utils/uploader";
 
-/** Member */
+/** Member Routes */
 router.post("/member/login", memberController.login);
-router.post("/member/signup", memberController.signup);
 router.post(
   "/member/logout",
   memberController.verifyAuth,
   memberController.logout
 );
-router.get(
-  "/member/detail",
-  memberController.verifyAuth,
-  memberController.getMemberDetail
-);
+router.post("/member/signup", memberController.signup);
 router.post(
   "/member/update",
   memberController.verifyAuth,
   uploader("members").single("memberImage"),
   memberController.updateMember
 );
+router.get("/member/admin", memberController.getAdmin);
+router.get(
+  "/member/detail",
+  memberController.verifyAuth,
+  memberController.getMemberDetail
+);
 router.get("/member/top-users", memberController.getTopUsers);
-router.get("/member/barber", memberController.getBarber);
 
-/** Product */
-
+/** Product Routes */
 router.get(
   "/product/all",
   memberController.retrieveAuth,
@@ -40,9 +40,16 @@ router.get(
   productController.getProduct
 );
 
-/** Order */
-
-router.post("/order/create", memberController.verifyAuth, orderController.createOrder)
-router.get("/order/all", memberController.verifyAuth, orderController.getMyOrders)
+/** Order Routes */
+router.post(
+  "/order/create",
+  memberController.verifyAuth,
+  orderController.createOrder
+);
+router.get(
+  "/order/all",
+  memberController.verifyAuth,
+  orderController.getMyOrders
+);
 
 export default router;

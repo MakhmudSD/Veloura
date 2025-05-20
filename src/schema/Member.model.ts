@@ -19,12 +19,16 @@ const memberSchema = new Schema(
       type: String,
       index: { unique: true, sparse: true },
       required: true,
+      trim: true,
+      minlength: 3,
+      maxlength: 30,
     },
 
     memberPhone: {
       type: String,
       index: { unique: true, sparse: true },
       required: true,
+      match: /^[0-9]{9,15}$/,
     },
 
     memberPassword: {

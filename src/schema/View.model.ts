@@ -5,22 +5,26 @@ const viewSchema = new Schema(
   {
     viewGroup: {
       type: String,
-      enum: ViewGroup,
+      enum: Object.values(ViewGroup),
       required: true,
     },
 
     memberId: {
       type: Schema.Types.ObjectId,
-      required: true,
       ref: "Member",
+      required: true,
     },
 
     viewRefId: {
-      type: Schema.Types.ObjectId, // relates to the page being used such as memberId or productId
+      type: Schema.Types.ObjectId, // e.g., productId, memberId, etc.
       required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    autoIndex: true,
+    collection: "views",
+  }
 );
 
 export default mongoose.model("View", viewSchema);

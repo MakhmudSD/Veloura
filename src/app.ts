@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import router from "./router";
 import routerAdmin from "./routerAdmin";
+import cors from "cors"
 import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/config";
 import ConnectMongoDB from "connect-mongodb-session";
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("./uploads"))
+app.use(cors({credentials: true, origin: true}))
 app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 

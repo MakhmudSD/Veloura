@@ -79,7 +79,7 @@ class MemberService {
     input: MemberUpdateInput
   ): Promise<Member> {
     const memberId = shapeIntoMongooseObjectId(member._id);
-    const result = this.memberModel
+    const result = await this.memberModel
       .findOneAndUpdate({ _id: memberId }, input, { new: true })
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
@@ -97,9 +97,9 @@ class MemberService {
     return result as unknown as Member[];
   }
 
-  public async getBarber(): Promise<Member> {
+  public async getAdmin(): Promise<Member> {
     const result = await this.memberModel.findOne({
-      memberType: MemberType.BARBER,
+      memberType: MemberType.ADMIN,
     });
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result as unknown as Member;
@@ -109,7 +109,7 @@ class MemberService {
 
   public async processSignup(input: MemberInput): Promise<Member> {
     const exist = await this.memberModel
-      .findOne({ memberType: MemberType.BARBER })
+      .findOne({ memberType: MemberType.ADMIN })
       .exec();
 
     if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
@@ -156,12 +156,12 @@ class MemberService {
     return result as unknown as Member;
   }
 
-  public async getUsers(): Promise<Member> {
+  public async getUsers(): Promise<Member[]> {
     const result = await this.memberModel
       .find({ memberType: MemberType.USER })
       .exec();
-    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-    return result as unknown as Member;
+    if (!result || result.length === 0) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result as unknown as Member[];
   }
 
   public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {

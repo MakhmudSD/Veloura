@@ -62,7 +62,6 @@ class OrderService {
       return "INSERTED";
     });
 
-    console.log("promisedList: ", promisedList);
     const orderItemState = await Promise.all(promisedList);
 
     console.log("orderItemState: ", orderItemState);
@@ -91,7 +90,7 @@ class OrderService {
         },
       ])
       .exec();
-    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    if (!result || result.length === 0) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result;
   }
 }

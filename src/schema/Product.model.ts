@@ -2,65 +2,70 @@ import mongoose, { Schema } from "mongoose";
 import {
   ProductStatus,
   ProductCategory,
-  ProductStyle,
-  // ProductDuration
+  ProductTier,
 } from "../libs/enums/products.enum";
 
-// Build type: Schema First vs Code First
 const productSchema = new Schema(
   {
     productStatus: {
       type: String,
-      enum: ProductStatus,
+      enum: Object.values(ProductStatus),
       default: ProductStatus.PROCESS,
     },
 
     productName: {
       type: String,
+      required: true,
+      trim: true,
     },
 
     productPrice: {
       type: Number,
       required: true,
+      min: 0,
     },
 
     productColor: {
       type: String,
+      trim: true,
     },
-
 
     productStyle: {
       type: String,
-      enum: ProductStyle,
-      default: ProductStyle.PREMIUM,
+      enum: Object.values(ProductTier),
+      default: ProductTier.PREMIUM,
       required: true,
     },
 
     productCategory: {
       type: String,
-      enum: ProductCategory,
-      default: ProductCategory.HAIRCUT,
+      enum: Object.values(ProductCategory),
+      default: ProductCategory.PERFUME,
+      required: true,
     },
 
     productDuration: {
       type: String,
+      trim: true,
     },
 
     productDesc: {
       type: String,
+      trim: true,
     },
 
     productImages: {
-      type: [ String ],
+      type: [String],
       default: [],
     },
 
     productViews: {
       type: Number,
       default: 0,
+      min: 0,
     },
   },
-  { timestamps: true, autoIndex: true  } // updatedAt, createdAt info
+  { timestamps: true, autoIndex: true }
 );
 
 export default mongoose.model("Product", productSchema);

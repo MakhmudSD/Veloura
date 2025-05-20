@@ -4,7 +4,7 @@ import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
 import { ProductInput, ProductInquiry } from "../libs/types/product";
-import ProductService from "../models/Product.Service.";
+import ProductService from "../models/Product.service";
 
 const productService = new ProductService();
 
@@ -15,9 +15,9 @@ productController.getProducts = async (req: Request, res: Response) => {
     console.log("getProducts here");
     const { order, page, limit, productCategory, search } = req.query;
     const inquiry: ProductInquiry = {
-      order: String(order),
-      page: Number(page),
-      limit: Number(limit),
+      order: String(order || "asc"),
+      page: Number.isNaN(Number(page)) ? 1 : Number(page),
+      limit: Number.isNaN(Number(limit)) ? 10 : Number(limit),
     };
     if (productCategory) {
       inquiry.productCategory = productCategory as ProductCategory;
@@ -56,12 +56,12 @@ productController.getAllProducts = async (req: Request, res: Response) => {
       console.log("ERROR on getAllProducts", err);
       const message =
         err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
-      res.send(`
+      res.status(HttpCode.INTERNAL_SERVER_ERROR).send(`
           <script>
-              alert("Succesfully created");
-              window.location.replace("/admin/product/all");
+            alert("Something went wrong while loading products.");
+            window.location.replace("/admin/product/all");
           </script>
-      `);
+        `);
     }
   }
 };
@@ -97,18 +97,16 @@ productController.createNewProduct = async (
 };
 
 productController.updateChosenProduct = async (req: Request, res: Response) => {
-  {
-    try {
-      console.log("updateChosenProduct");
-      const id = req.params.id;
-      const result = await productService.updateChosenProduct(id, req.body);
-      res.status(HttpCode.OK).json({ data: result });
-      console.log("result", result);
-    } catch (err) {
-      console.log("ERROR on updateChosenProduct");
-      if (err instanceof Errors) res.status(err.code).json(err);
-      else res.status(Errors.standard.code).json(Errors.standard);
-    }
+  try {
+    console.log("updateChosenProduct");
+    const id = req.params.id;
+    const result = await productService.updateChosenProduct(id, req.body);
+    res.status(HttpCode.OK).json({ data: result });
+    console.log("result", result);
+  } catch (err) {
+    console.log("ERROR on updateChosenProduct");
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
   }
 };
 
