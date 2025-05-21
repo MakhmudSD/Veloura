@@ -25,11 +25,11 @@
       </ul>
     </div>
 
-    <div class="restaurant-menu-frame">
+    <div class="shop-menu-frame">
       <div class="board">
-        <div class="dishes-table">
-          <span class="new-dish-txt" style="margin-bottom: 30px">
-            BARBERMASTER MENU
+        <div class="shop-table">
+          <span class="new-shop-txt" style="margin-bottom: 30px">
+            VELOURA MENU
           </span>
           <table class="table table-bordered table-hover">
             <thead class="thead-light">
@@ -38,26 +38,24 @@
                 <th scope="col">Product Category</th>
                 <th scope="col">Product Style</th>
                 <th scope="col">Product Price</th>
-                <th scope="col">Product Duration</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
             <% products.map(function(value, key) { %>
               <tbody style="background: white">
-                <td><%= key + 1 %> </td>
-                <td><%= value.productCategory %> </td>
+                <td><%= key + 1 %></td>
+                <td><%= value.productCategory %></td>
                 <td><%= value.productStyle %></td>
                 <td><%= value.productPrice %></td>
-                <td><%= value.productDuration %></td>
                 <td>
-                  <select class="spec-select new-product-status" id="<%= value._id%>">
-                    <option value="AVAILABLE" "<%=value.productStatus === "AVAILABLE" ? "selected" : "" %>">AVAILABLE</option>
-                    <option value="PROCESS" <%=value.productStatus === "PROCESS" ? "selected" : "" %>>PROCESS</option>
-                    <option value="UNAVAILABLE" <%=value.productStatus === "UNAVAILABLE" ? "selected" : "" %>>UNAVAILABLE</option>
+                  <select class="spec-select new-product-status" id="<%= value._id %>">
+                    <option value="AVAILABLE" <%= value.productStatus === "AVAILABLE" ? "selected" : "" %>>AVAILABLE</option>
+                    <option value="PROCESS" <%= value.productStatus === "PROCESS" ? "selected" : "" %>>PROCESS</option>
+                    <option value="UNAVAILABLE" <%= value.productStatus === "UNAVAILABLE" ? "selected" : "" %>>UNAVAILABLE</option>
                   </select>
                 </td>
               </tbody>
-              <% }) %>
+            <% }) %>
           </table>
           <div
             class="long-input"
@@ -72,62 +70,38 @@
           onsubmit="return validateForm()"
           action="/admin/product/create"
           method="POST"
-          class="dish-container"
+          class="shop-container"
           enctype="multipart/form-data"
         >
           <div class="long-input" style="display: flex; align-items: center">
-            <span class="new-dish-txt">NEW PRODUCT DETAIL</span>
+            <span class="new-shop-txt">NEW PRODUCT DETAIL</span>
           </div>
           <div class="login-input-frame">
             <div class="long-input">
               <label>Product Name</label>
-              <input
-                type="text"
-                placeholder="Name"
-                name="productName"
-                class="product-name"
-              />
+              <input type="text" placeholder="Name" name="productName" class="product-name" />
             </div>
-            <input
-              name="productStatus"
-              value="AVAILABLE"
-              class="product-status"
-              hidden
-            />
+            <input name="productStatus" value="AVAILABLE" class="product-status" hidden />
           </div>
+          
           <div class="half-input-frame">
             <div class="half-input">
               <label>Product Price</label>
-              <input
-                type="number"
-                placeholder="Price"
-                name="productPrice"
-                class="product-price"
-              />
+              <input type="number" placeholder="Price" name="productPrice" class="product-price" />
             </div>
-            <div class="half-input">
-              <label>Product Duration</label>
-              <input
-                type="number"
-                placeholder="Time"
-                name="productDuration"
-                class="product-duration"
-              />
-            </div>
-          </div>
-          <div class="half-input-frame">
+          
             <div class="half-input">
               <label>Product Category</label>
               <select class="product-category" name="productCategory">
-                <option value="HAIRCUT" selected>HAIRCUT</option>
-                <option value="BEARD_TRIM">BEARD_TRIM</option>
-                <option value="COLORING">COLORING</option>
-                <option value="FACIAL">FACIAL</option>
-                <option value="OTHERS">OTHERS</option>
+                <option value="PERFUME" selected>PERFUME</option>
+                <option value="EAU_DE_TOILETTE">EAU DE TOILETTE</option>
+                <option value="GIFT_SET">GIFT SET</option>
+                <option value="ACCESSORY">ACCESSORY</option>
+                <option value="BODY_PRODUCT">BODY PRODUCT</option>
               </select>
             </div>
-
-            <div class="half-input" id="product-style">
+          
+            <div class="half-input">
               <label>Product Style</label>
               <select class="product-style" name="productStyle">
                 <option value="BASIC">BASIC</option>
@@ -136,18 +110,30 @@
                 <option value="PACKAGE">PACKAGE</option>
               </select>
             </div>
-
-            <div class="half-input" id="product-color" style="display: none">
-              <label>Product Color</label>
-              <select class="product-color" name="productColor">
-                <option value="RED">RED</option>
-                <option value="BLUE" selected>BLUE</option>
-                <option value="BLACK">BLACK</option>
-                <option value="BLONDE">BLONDE</option>
-                <option value="CUSTOMIZE">CUSTOMIZE</option>
+          
+            <div class="half-input">
+              <label>Product Volume (ml)</label>
+              <select name="productVolume">
+                <option value="30">30 ml</option>
+                <option value="50">50 ml</option>
+                <option value="75">75 ml</option>
+                <option value="100">100 ml</option>
+                <option value="150">150 ml</option>
+              </select>
+            </div>
+          
+            <div class="half-input">
+              <label>Product Size</label>
+              <select name="productSize">
+                <option value="SMALL">SMALL</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LARGE">LARGE</option>
+                <option value="SET">SET</option>
               </select>
             </div>
           </div>
+          
+
           <div class="long-input">
             <label>Product Description</label>
             <textarea name="productDesc" class="product-desc"></textarea>

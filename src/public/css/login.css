@@ -40,7 +40,7 @@ body {
   background: transparent;
 }
 
- .particle {
+.particle {
   position: absolute;
   width: 8px;
   height: 8px;

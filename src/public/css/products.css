@@ -1,367 +1,214 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #D4AF37;
+  margin: 0;
+  padding: 20px;
+}
+
 .products-container {
   position: relative;
-  width: auto;
-  height: auto;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(-45deg, #110303bf, #e37813, #011c1aba, #968383);
-}
-
-.products-container a {
-  text-decoration: none;
-  color: #000000;
-}
-
-.products-container .nav-item a {
-  color: #e3c08d;
-}
-
-.products-container .nav-item a.disabled {
-  color: #898071;
+  width: 100%;
+  height: auto; /* full viewport height */
+  overflow: hidden;
+  background: none;
+  margin: 10px;
+  padding-top: 80px; /* pushes container below navbar */
+  display: inline-block; 
+  z-index: 0;
 }
 
 .products-container .navigation-menu {
   position: absolute;
-  z-index: 10000;
-  top: 1%;
-  color: #efefee;
+  top: 30px; /* height below navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0;
+  z-index: 10;
+  width: auto;
+  padding: 10px 20px;
+  border-radius: 8px;
   font-size: 40px;
   font-family: monospace;
-}
-
-.products-container .restaurant-menu-frame {
-  position: relative;
-  padding-bottom: 80px;
-  width: 100%;
-  height: auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.products-container .restaurant-menu-frame .board {
-  position: relative;
-  margin-top: 100px;
-  width: 1320px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.products-container .board .dishes-table {
-  position: relative;
-  width: 100%;
-  height: auto;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.products-container .board .dish-container {
-  position: relative;
-  margin-top: 20px;
-  width: 100%;
-  height: auto;
-
-
-  display: none;
-  flex-direction: column;
-  align-items: center;
-}
-
-.products-container .new-dish-txt {
-  font-family: "Source Serif Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 25px;
-  color: #ffffff;
-}
-
-.products-container .long-input {
-  position: relative;
-  margin-top: 25px;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.products-container .long-input label {
-  font-family: "Source Serif Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 25px;
-  color: #ffffff;
-}
-
-.products-container .long-input input {
-  position: relative;
-  margin-top: 10px;
-  padding-left: 20px;
-  width: 100%;
-  height: 54px;
-  border: none;
-  background: #f7f7f7;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  color: #4f547b;
-}
-
-.products-container .long-input textarea {
-  position: relative;
-  margin-top: 10px;
-  padding: 20px;
-  width: 100%;
-  height: 200px;
-  border: none;
-  background: #f7f7f7;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  color: #4f547b;
-}
-
-.products-container .half-input select {
-  position: relative;
-  margin-top: 10px;
-  padding: 0px 20px;
-  width: 100%;
-  height: 55px;
-  display: flex;
-  border: none;
-  background: #f7f7f7;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  color: #4f547b;
-}
-
-.products-container select:focus {
-  min-width: 100%;
-  width: auto;
-}
-
-.products-container .long-input select {
-  position: relative;
-  margin-top: 10px;
-  padding: 0px 20px;
-  width: 100%;
-  height: 55px;
-  display: flex;
-  border: none;
-  background: #f7f7f7;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  color: #4f547b;
-}
-
-.products-container .dish-container .half-input-frame {
-  position: relative;
-  margin-top: 25px;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.products-container .half-input-frame .half-input {
-  position: relative;
-  width: 49%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.products-container .half-input label {
-  font-family: "Source Serif Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 25px;
-  color: #ffffff;
-}
-
-.products-container .half-input input {
-  position: relative;
-  margin-top: 10px;
-  padding-left: 20px;
-  width: 100%;
-  height: 54px;
-  border: none;
-  background: #f7f7f7;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-}
-
-.products-container .media-frame {
-  position: relative;
-  margin-top: 10px;
-  width: 100%;
-  height: 250px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.products-container .media-frame .upload-img-box {
-  position: relative;
-  width: 19%;
-  height: 100%;
+  color: #efefee;
   display: flex;
   justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  cursor: pointer;
+  gap: 30px;
 }
 
-.products-container .upload-img-box img {
-  position: relative;
+.products-container .navigation-menu nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.products-container .navigation-menu .nav-item {
+  display: inline;
+}
+
+.products-container .navigation-menu .nav-item a {
+  font-family: 'Playfair Display', serif; /* or 'Parisienne', cursive */
+  font-style: italic; 
+  font-size: 50px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-top: -70px;
+  margin-left: 20px;
+  color: #e3c08d;
+  text-decoration: none;
+}
+
+.products-container .navigation-menu a.active {
+  font-weight: bold;
+}
+
+/* Form */
+.products-container form.shop-container {
   width: 100%;
-  height: 100%;
+  margin-top: 100px;
+  background: #000;
+  border-radius: 15px;
+  padding: 30px 35px;
+  box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
+  display: none; /* jQuery slideToggle controls this */
+  flex-direction: column;
+  gap: 30px;
+  color: #D4AF37;
+  overflow: hidden;
+}
+
+.products-container form.shop-container label {
+  font-weight: 700;
+  font-size: 15px;
+  color: #FFD700;
   display: block;
-  border-radius: 10px;
+  margin-bottom: 8px; /* space below label */
 }
 
-.products-container .img-frame {
-  position: relative;
+.products-container form.shop-container input[type="text"],
+.products-container form.shop-container input[type="number"],
+.products-container form.shop-container select,
+.products-container form.shop-container textarea {
+  padding: 12px 16px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #D4AF37;
+  background-color: #FDF6E3;
+  color: #000;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: border-color 0.3s ease;
+  resize: vertical;
   width: 100%;
+  box-sizing: border-box;
+}
+
+.products-container form.shop-container input[type="text"]:focus,
+.products-container form.shop-container input[type="number"]:focus,
+.products-container form.shop-container select:focus,
+.products-container form.shop-container textarea:focus {
+  outline: none;
+  border-color: #FFD700;
+}
+
+/* Layout improvements for input blocks */
+.products-container .long-input,
+.products-container .half-input {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
-.products-container .img-frame label {
-  margin-top: 30px;
-  font-family: "Source Serif Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 25px;
-  color: #ffffff;
+.products-container .half-input {
+  flex: 1 1 200px; /* allow half-inputs to flex nicely in rows */
+  min-width: 200px;
 }
 
-.products-container #file {
-  opacity: 0;
-  border: none;
-  border-radius: 10px;
-  background: grey;
-  position: absolute;
-  left: 0px;
-  width: 100%;
-  top: 0px;
-  height: 100%;
-  cursor: pointer;
+.products-container .half-input-frame {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
+/* Buttons */
 .products-container .operation-buttons {
-  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  margin: 10px;
+}
+
+.products-container .long-input button.btn-primary,
+.products-container .operation-buttons button.btn-primary {
+  background-color: #D4AF37;
+  border: none;
+  color: #000;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(212, 175, 55, 0.5);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.products-container .long-input button.btn-primary:hover,
+.products-container .operation-buttons button.btn-primary:hover {
+  background-color: #000;
+  color: #D4AF37;
+}
+
+.products-container .operation-buttons button.btn-danger {
+  background-color: #000;
+  border: none;
+  color: #D4AF37;
+  padding: 10px 25px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+}
+
+.products-container .operation-buttons button.btn-danger:hover {
+  background-color: #3D3D3D;
+}
+
+.products-container .shop-menu-frame .img-frame .media-frame {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-around;
+  gap: 20px; /* space between uploaders */
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
-.products-container .spec-select {
-  position: relative;
-  padding: 0px 7px;
-  height: 27px;
-  background: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  color: #4f547b;
-}
-
-.products-container table td,
-table th {
-  text-align: center;
-  vertical-align: middle;
-}
-
-.products-container .switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 20px;
-}
-
-.products-container .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.products-container .slider {
-  position: absolute;
+.products-container .shop-menu-frame .img-frame .media-frame input[type="file"] {
+  width: 130px;  /* smaller width */
+  padding: 6px 8px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #D4AF37;
+  background-color: #FDF6E3;
+  color: #000;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
 }
 
-.products-container .slider:before {
-  position: absolute;
-  content: "";
-  height: 14px;
-  width: 14px;
-  left: 6px;
-  bottom: 3.5px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+/* Toggle button */
+.btn-toggle-new-product {
+  background-color: #D4AF37;
+  color: #000;
+  border: none;
+  padding: 12px 25px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.5);
+  transition: background-color 0.3s ease;
 }
 
-.products-container input:checked + .slider {
-  background-color: #2196f3;
-}
-
-.products-container input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
-}
-
-.products-container input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-.products-container .slider.round {
-  border-radius: 34px;
-}
-
-.products-container .slider.round:before {
-  border-radius: 50%;
+.btn-toggle-new-product:hover {
+  background-color: #000;
+  color: #D4AF37;
 }

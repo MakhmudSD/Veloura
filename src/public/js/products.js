@@ -13,12 +13,12 @@ $(function () {
     });
 
   $("#process-btn").on("click", () => {
-    $(".dish-container").slideToggle(500);
+    $(".shop-container").slideToggle(500);
     $("#process-btn").css("display", "none");
   });
 
   $("#cancel-btn").on("click", () => {
-    $(".dish-container").slideToggle(100);
+    $(".shop-container").slideToggle(100);
     $("#process-btn").css("display", "flex");
   });
 
