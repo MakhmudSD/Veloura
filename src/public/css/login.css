@@ -1,31 +1,72 @@
-.login-container {
-  position: relative;
+html,
+body {
   width: 100%;
   height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #1a1a1a;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(212, 175, 55, 0.15), transparent),
+    radial-gradient(ellipse at bottom right, rgba(255, 255, 255, 0.08), transparent),
+    linear-gradient(120deg, rgba(212, 175, 55, 0.05), rgba(0, 0, 0, 0.9));
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #e5e5e5;
+  margin: 0;
+  padding: 0;
+}
+
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  animation: gradient 15s ease infinite;
-  -webkit-animation: gradient 15s ease infinite;
-  background-size: 200% 200%;
+  background: transparent;
+}
+
+.login-container #particles-container {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  perspective: 800px;
+  background: transparent;
+}
+
+.login-container .particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #d4af37;
+  border-radius: 50%;
+  opacity: 0.6;
 }
 
 .login-container a {
   text-decoration: none;
-  color: black;
+  color: #d4af37;
 }
 
 .login-container .login-frame {
   position: relative;
-  width: 420px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  background: #ffffff;
-  padding: 25px;
+  border: 2px solid #d4af37;
+  box-shadow: 0 0 20px #d4af37aa;
+  z-index: 1;
+  width: 80%;
+  max-width: 950px;
+  padding: 60px 80px;
+  gap: 100px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+  color: #f8f8f8;
 }
 
 .login-container .login-frame .login-top {
@@ -37,36 +78,36 @@
 }
 
 .login-container .login-top span {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 34px;
+  display: flex;
+  justify-content: center;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  font-size: 38px;
+  font-family: 'Playfair Display', serif;
+  color: #d4af37;
 }
 
 .login-container .login-top p {
-  margin-top: 15px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
+  font-size: 14px;
+  color: #aaa;
+  margin-top: 5px;
 }
 
-.login-container .login-top div {
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
+.welcome-msg {
+  color: #d4af37cc;
+  font-style: italic;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 5px;
 }
 
 .login-container .login-frame .login-input-frame {
-  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .login-container .login-input-container {
@@ -79,52 +120,104 @@
 }
 
 .login-container .login-input-container label {
-  margin-bottom: 0px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18px;
+  font-size: 18px;
+  color: #f0e68c;
+  font-weight: 500;
 }
 
 .login-container .login-input-container input {
-  position: relative;
-  margin-top: 10px;
-  padding-left: 20px;
+  background: #2a2a2a;
+  border: 1px solid #555;
+  color: #f0f0f0;
+  border-radius: 10px;
+  height: 50px;
+  padding-left: 15px;
+  transition: all 0.3s ease;
   width: 100%;
-  height: 55px;
-  background: #f6f5f5;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
+}
+
+.login-container .login-input-container input:focus {
+  outline: none;
+  border: 1px solid #d4af37;
+  box-shadow: 0 0 5px #d4af37;
 }
 
 .login-container .login-frame .login-btn {
-  position: relative;
-  margin-top: 25px;
+  margin-top: 35px;
+  background: linear-gradient(145deg, #d4af37, #b68c25);
+  color: #0d0d0d;
+  font-weight: bold;
+  border: none;
+  font-size: 22px;
+  padding: 15px;
   width: 100%;
-  height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #33a0ff;
   border-radius: 10px;
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 800;
-  font-size: 24px;
-  line-height: 33px;
-  letter-spacing: -0.02em;
-  color: #ffffff;
+  transition: background 0.3s ease;
 }
+
+.login-container .login-frame .login-btn:hover {
+  background: linear-gradient(145deg, #e6c44c, #d4af37);
+  cursor: pointer;
+}
+
+.login-container .login-frame .login-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  animation: shine 3s infinite;
+  transform: rotate(25deg);
+  pointer-events: none;
+}
+
+.login-container .login-frame.bottom-links-wrapper {
+  margin-top: 10px;
+}
+
+.login-container .bottom-links {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: #ccc;
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 19px;
+  box-shadow: 0 4px 10px rgba(100, 64, 251, 0.2);
+}
+
+.login-container .bottom-links a {
+  color: #826ed1;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 4px;
+  font-size: 19px;
+
+  transition: color 0.3s ease;
+}
+
+.login-container .bottom-links a:hover {
+  color: #e6c44c;
+  text-decoration: underline;
+}
+
+.login-container .go-back {
+  margin-bottom: 10px;
+}
+
 
 /* Background animation */
 @-webkit-keyframes gradient {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -134,9 +227,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }

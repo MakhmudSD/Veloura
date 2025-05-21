@@ -259,49 +259,30 @@ input[type="file"] {
   margin-bottom: 10px;
 }
 
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-  .signup-container .signup-frame {
-    padding: 50px 30px;
-    width: 90%;
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
 
-  .signup-container .media-frame {
-    flex-direction: column;
-    align-items: center;
-    height: auto;
+  50% {
+    background-position: 100% 50%;
   }
 
-  .signup-container .media-frame .upload-img-frame {
-    width: 80%;
-    margin-bottom: 20px;
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
 
-  .signup-container .media-frame .upload-container {
-    width: 100%;
-    margin-left: 0;
-    align-items: center;
+  50% {
+    background-position: 100% 50%;
   }
 
-  .signup-container .file-box {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .signup-container .file-box .upload-name,
-  .signup-container .file-box label {
-    width: 100%;
-    border-radius: 8px;
-  }
-
-  .signup-container .sign-input-frame {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .signup-container .sign-up-frame {
-    width: 100%;
+  100% {
+    background-position: 0% 50%;
   }
 }

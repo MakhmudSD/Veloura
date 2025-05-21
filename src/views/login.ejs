@@ -1,45 +1,43 @@
 <%- include('includes/header') %>
 
-<link rel="stylesheet" type="text/css" href="/css/login.css" />
+  <link rel="stylesheet" type="text/css" href="/css/login.css" />
 
-<body>
-  <form class="login-container" action="/admin/login" METHOD="POST">
-    <div class="login-frame">
-      <div class="login-top">
-        <span>Enter</span>
-        <div>Go back <a href="/admin" style="color: #6440fb">Home</a></div>
-        <p>
-          Not registered yet?
-          <a href="/admin/signup" style="color: #6440fb">Signup</a>
-        </p>
-      </div>
-      <div class="login-input-frame">
-        <div class="login-input-container">
-          <label>Restaurant *</label>
-          <input
-            type="text"
-            name="memberNick"
-            class="member-nick"
-            placeholder="Username"
-            value=""
-            required
-          />
+  <body>
+    <form class="login-container" action="/admin/login" METHOD="POST">
+      <div class="login-frame">
+        <div class="login-top">
+          <img src="/img/crown.png" alt="Logo" style="width: 60px; margin: 0 auto 15px; display: block;" />
+          <span>Login to your account</span>
+          <p class="welcome-msg">Welcome back! Please log in to continue.</p>
         </div>
-        <div class="login-input-container">
-          <label>Password *</label>
-          <input
-            type="password"
-            name="memberPassword"
-            class="member-password"
-            placeholder="Password"
-            value=""
-            required
-          />
+        <div class="login-input-frame">
+          <div class="login-input-container">
+            <label>Shop *</label>
+            <input type="text" name="memberNick" class="member-nick" placeholder="Username" value="" required />
+          </div>
+          <div class="login-input-container">
+            <label>Password *</label>
+            <input type="password" name="memberPassword" class="member-password" placeholder="Password" value=""
+              required />
+          </div>
+        </div>
+        <button class="login-btn btn" name="login" type="submit">Login</button>
+        <div class="bottom-links-wrapper">
+          <div class="bottom-links">
+            <div class="go-back">Go back <a href="/admin">Home</a></div>
+            <p>
+              Not registered yet?
+              <a href="/admin/signup">Signup</a>
+            </p>
+          </div>
         </div>
       </div>
-      <button class="login-btn btn" name="login" type="submit">Login</button>
-    </div>
-  </form>
-</body>
+    </form>
+    <div id="particles-container"></div>
 
-<%- include('includes/footer') %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+  </body>
+
+  <%- include('includes/footer') %>

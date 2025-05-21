@@ -10,7 +10,7 @@ routerAdmin.get("/", adminController.goHome);
 routerAdmin.get("/signup", adminController.getSignup);
 routerAdmin.post(
   "/signup",
-  makeUploader("members").single("memberImage"),
+  makeUploader("members").single("shopImage"),
   adminController.signup
 );
 routerAdmin.get("/login", adminController.getLogin);
