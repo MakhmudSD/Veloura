@@ -26,6 +26,12 @@ export enum ProductStatus {
   UNAVAILABLE = "UNAVAILABLE",
 }
 
+export enum ProductTargetAudience {
+  MEN = "MEN",
+  WOMEN = "WOMEN",
+  UNISEX = "UNISEX",
+}
+
 export enum ProductCategory {
   PERFUME = "PERFUME",          // General perfumes (can include both Eau de Parfum and Eau de Toilette)
   EAU_DE_TOILETTE = "EAU_DE_TOILETTE",  // Lighter fragrance type

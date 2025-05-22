@@ -3,6 +3,7 @@ import {
   ProductStatus,
   ProductCategory,
   ProductTier,
+  ProductTargetAudience,
 } from "../libs/enums/products.enum";
 
 const productSchema = new Schema(
@@ -25,9 +26,10 @@ const productSchema = new Schema(
       min: 0,
     },
 
-    productColor: {
+    productTargetAudience: {
       type: String,
-      trim: true,
+      enum: Object.values(ProductTargetAudience),
+      default: ProductTargetAudience.UNISEX,
     },
 
     productStyle: {
@@ -59,9 +61,25 @@ const productSchema = new Schema(
       default: [],
     },
 
+    productTier: {
+      type: String,
+      enum: Object.values(ProductTier),
+      default: ProductTier.STANDARD,
+    },
+
     productViews: {
       type: Number,
       default: 0,
+      min: 0,
+    },
+
+    productVolumeMl: {
+      type: Number,
+      min: 0,
+    },
+
+    productQuantity: {
+      type: Number,
       min: 0,
     },
   },

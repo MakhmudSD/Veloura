@@ -3,6 +3,7 @@ import {
   ProductCategory,
   ProductTier,
   ProductStatus,
+  ProductTargetAudience,
 } from "../enums/products.enum";
 
 export interface Product {
@@ -11,14 +12,14 @@ export interface Product {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productLongevity?: number; // renamed from duration for clarity
   productTier: ProductTier; // renamed for clarity
+  productQuantity?: number;
   productDesc?: string;
   productImages: string[];
   productViews: number;
   productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
   productVolumeMl?: number; // size in milliliters
-  productGender?: "male" | "female" | "unisex";
+  productTargetAudience?: ProductTargetAudience;
 }
 
 export interface ProductInquiry {
@@ -34,14 +35,14 @@ export interface ProductInput {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productLongevity?: number;
   productTier?: ProductTier;
+  productQuantity?: number;
   productDesc?: string;
   productImages: string[];
   productViews: number;
   productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
   productVolumeMl?: number; // size in milliliters
-  productGender?: "male" | "female" | "unisex";
+  productTargetAudience?: ProductTargetAudience;
 }
 
 export interface ProductUpdateInput {
@@ -50,12 +51,12 @@ export interface ProductUpdateInput {
   productCategory?: ProductCategory; // fixed typo here
   productName?: string;
   productPrice?: number;
-  productLongevity?: number;
   productTier?: ProductTier;
+  productQuantity?: number;
   productDesc?: string;
   productImages?: string[];
   productViews?: number;
   productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
   productVolumeMl?: number; // size in milliliters
-  productGender?: "male" | "female" | "unisex";
+  productTargetAudience?: ProductTargetAudience;
 }
