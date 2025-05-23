@@ -113,6 +113,10 @@ adminController.updateChosenUser = async (req: Request, res: Response) => {
   {
     try {
       console.log("updateChosenUser");
+      const { _id } = req.body;
+      if (!_id || typeof _id !== "string") {
+        return res.status(400).json({ message: "Missing or invalid _id" });
+      }
       const result = await memberService.updateChosenUser(req.body);
       res.status(HttpCode.OK).json({ data: result });
     } catch (err) {
