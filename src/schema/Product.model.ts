@@ -42,7 +42,7 @@ const productSchema = new Schema(
     productCategory: {
       type: String,
       enum: Object.values(ProductCategory),
-      default: ProductCategory.PERFUME,
+      default: ProductCategory.ALL,
       required: true,
     },
 

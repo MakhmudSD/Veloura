@@ -36,7 +36,7 @@ orderController.createOrder = async (req: ExtendedRequest, res: Response) => {
       const inquiry: OrderInquiry = {
         page: Number.isNaN(page) ? 1 : page,
         limit: Number.isNaN(limit) ? 10 : limit,
-        orderStatus: req.query.orderStatus as OrderStatus || OrderStatus.AVAILABLE,
+        orderStatus: req.query.orderStatus as OrderStatus || OrderStatus.PROCESS,
       };
 
       console.log("inquiry", inquiry);

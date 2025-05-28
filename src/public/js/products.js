@@ -1,8 +1,8 @@
 console.log("Products frontend javascript file");
+
 $(function () {
-  const categorySelect = document.querySelector(
-    'select[name="productCategory"]'
-  );
+  // Toggle between volume and quantity based on category
+  const categorySelect = document.querySelector('select[name="productCategory"]');
   const volumeContainer = document.getElementById("volume-container");
   const quantityContainer = document.getElementById("quantity-container");
 
@@ -11,63 +11,53 @@ $(function () {
     if (selected === "ACCESSORY" || selected === "GIFT_SET") {
       volumeContainer.style.display = "none";
       quantityContainer.style.display = "block";
-
-      volumeContainer.querySelector(
-        'select[name="productVolumeMl"]'
-      ).disabled = true;
-      quantityContainer.querySelector(
-        'input[name="productQuantity"]'
-      ).disabled = false;
+      volumeContainer.querySelector('select[name="productVolumeMl"]').disabled = true;
+      quantityContainer.querySelector('input[name="productQuantity"]').disabled = false;
     } else {
       volumeContainer.style.display = "block";
       quantityContainer.style.display = "none";
-
-      volumeContainer.querySelector(
-        'select[name="productVolumeMl"]'
-      ).disabled = false;
-      quantityContainer.querySelector(
-        'input[name="productQuantity"]'
-      ).disabled = true;
+      volumeContainer.querySelector('select[name="productVolumeMl"]').disabled = false;
+      quantityContainer.querySelector('input[name="productQuantity"]').disabled = true;
     }
   };
 
   toggleVolumeOrQuantity();
   categorySelect.addEventListener("change", toggleVolumeOrQuantity);
-});
 
-// Toggle shop container on process/cancel button click
-$("#process-btn").on("click", () => {
-  $(".shop-container").slideToggle(500);
-  $("#process-btn").css("display", "none");
-});
+  // Toggle shop container on process/cancel button click
+  $("#process-btn").on("click", () => {
+    $(".shop-container").slideToggle(500);
+    $("#process-btn").css("display", "none");
+  });
 
-$("#cancel-btn").on("click", () => {
-  $(".shop-container").slideToggle(100);
-  $("#process-btn").css("display", "flex");
-});
+  $("#cancel-btn").on("click", () => {
+    $(".shop-container").slideToggle(100);
+    $("#process-btn").css("display", "flex");
+  });
 
-// Product status change handler
-$(".new-product-status").on("change", async function (e) {
-  const id = e.target.id;
-  const productStatus = $(`#${id}.new-product-status`).val();
+  // Product status change handler
+  $(".new-product-status").on("change", async function (e) {
+    const id = e.target.id;
+    const productStatus = $(`#${id}.new-product-status`).val();
 
-  try {
-    const response = await axios.post(`/admin/product/${id}`, {
-      productStatus: productStatus,
-    });
-    console.log(response.data);
-    const result = response.data;
-    if (result.data) {
-      console.log("Product updated successfully!");
-      $(".new-product-status").blur();
-    } else {
+    try {
+      const response = await axios.post(`/admin/product/${id}`, {
+        productStatus: productStatus,
+      });
+      console.log(response.data);
+      const result = response.data;
+      if (result.data) {
+        console.log("Product updated successfully!");
+        $(".new-product-status").blur();
+      } else {
+        alert("Unable to update the product. Please try again");
+      }
+    } catch (err) {
+      console.error("ERROR on productStatus", err);
       alert("Unable to update the product. Please try again");
     }
-  } catch (err) {
-    console.error("ERROR on productStatus", err);
-    alert("Unable to update the product. Please try again");
-  }
-});
+  });
+
 // Particle background canvas animation
 const canvas = document.getElementById("background-canvas");
 const ctx = canvas.getContext("2d");
@@ -126,24 +116,30 @@ function validateForm() {
   return true;
 }
 
+
+  // Enable image click to open hidden file input
+  $(".upload-image").on("click", function () {
+    const inputId = $(this).data("input-id");
+    $(`#${inputId}`).click();
+  });
+});
+
 // Image preview handler for new product file input
 function previewFileHandler(input, order) {
-  const imgClassName = input.className;
-  const file = $(`.${imgClassName}`).get(0).files[0];
+
+  const file = input.files[0];
+
+  if (!file) return;
 
   const validImageType = ["image/jpg", "image/jpeg", "image/png", "image/webp"];
-  if (!validImageType.includes(file?.type)) {
-    alert(
-      "Only JPEG, JPG, WEBP or PNG image files are allowed. Please try again"
-    );
+  if (!validImageType.includes(file.type)) {
+    alert("Only JPEG, JPG, WEBP or PNG image files are allowed. Please try again");
     return;
   }
 
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function () {
-      $(`#image-section-${order}`).attr("src", reader.result);
-    };
-    reader.readAsDataURL(file);
-  }
+  const reader = new FileReader();
+  reader.onload = function () {
+    $(`#image-section-${order}`).attr("src", reader.result);
+  };
+  reader.readAsDataURL(file);
 }

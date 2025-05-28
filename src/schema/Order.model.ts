@@ -18,7 +18,7 @@ const orderSchema = new Schema(
     orderStatus: {
       type: String,
       enum: Object.values(OrderStatus),
-      default: OrderStatus.PROCESSING,
+      default: OrderStatus.PROCESS,
       required: true,
       trim: true,
     },

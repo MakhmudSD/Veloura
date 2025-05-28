@@ -67,12 +67,12 @@
                   </td>
                   <td>
                     <select class="spec-select new-product-status" id="<%= value._id %>">
-                      <option value="AVAILABLE" <%=value.productStatus==="AVAILABLE" ? "selected" : "" %>>AVAILABLE
+                      <option value="PAUSE" <%=value.productStatus==="PAUSE" ? "selected" : "" %>>PAUSE
                       </option>
-                      <option value="PROCESSING" <%=value.productStatus==="PROCESSING" ? "selected" : "" %>>PROCESSING
+                      <option value="PROCESS" <%=value.productStatus==="PROCESS" ? "selected" : "" %>>PROCESS
                       </option>
-                      <option value="UNAVAILABLE" <%=value.productStatus==="UNAVAILABLE" ? "selected" : "" %>
-                        >UNAVAILABLE</option>
+                      <option value="FINISH" <%=value.productStatus==="FINISH" ? "selected" : "" %>
+                        >FINISH</option>
                     </select>
                   </td>
                 </tbody>

@@ -21,9 +21,9 @@ export enum ProductSize {
 }
 
 export enum ProductStatus {
-  AVAILABLE = "AVAILABLE",
+  PAUSE = "PAUSE",
   PROCESS = "PROCESS",
-  UNAVAILABLE = "UNAVAILABLE",
+  FINISH = "FINISH",
 }
 
 export enum ProductTargetAudience {
@@ -33,6 +33,7 @@ export enum ProductTargetAudience {
 }
 
 export enum ProductCategory {
+  ALL = "ALL",
   PERFUME = "PERFUME",          // General perfumes (can include both Eau de Parfum and Eau de Toilette)
   EAU_DE_TOILETTE = "EAU_DE_TOILETTE",  // Lighter fragrance type
   GIFT_SET = "GIFT_SET",        // Gift sets or bundles
