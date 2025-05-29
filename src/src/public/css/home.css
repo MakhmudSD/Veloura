@@ -1,0 +1,79 @@
+.home-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  background: none;
+  margin: 0; padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.home-container .animation-frame {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container .animation-frame .perfume-video {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  border-radius: 0;
+  box-shadow: none;
+  z-index: -1;
+}
+
+.home-container .navigation-menu {
+  position: absolute; /* inside animation frame */
+  top: 20px; /* space from top */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: auto;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 40px;
+  font-family: monospace;
+  color: #efefee;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.home-container .navigation-menu nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.home-container .navigation-menu .nav-item {
+  display: inline;
+}
+
+.home-container .navigation-menu .nav-item a {
+  font-family: 'Playfair Display', serif; /* or 'Parisienne', cursive */
+  /* optional styling for French vibe */
+  font-style: italic; 
+  font-size: 50px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-top: -20px;
+  margin-left: 20px;
+  color: #e3c08d; /* your existing color */
+  text-decoration: none;
+}
+
+.home-container .navigation-menu a.active {
+  font-weight: bold;
+}

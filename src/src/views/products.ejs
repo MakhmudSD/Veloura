@@ -1,0 +1,223 @@
+<%- include('includes/header') %>
+
+  <link rel="stylesheet" type="text/css" href="/css/products.css" />
+
+  <body>
+    <canvas id="background-canvas"></canvas>
+    <div class="products-container">
+      <div class="navigation-menu">
+        <ul class="nav justify-content-center">
+          <li class="nav-item" style="cursor: pointer">
+            <a class="nav-link active" href="/admin/">Home</a>
+          </li>
+          <li class="nav-item" style="cursor: pointer">
+            <a class="nav-link" href="/admin/product/all">Menu</a>
+          </li>
+          <li class="nav-item" style="cursor: pointer">
+            <a class="nav-link" href="/admin/user/all">Users</a>
+          </li>
+          <li class="nav-item" style="cursor: pointer" onclick="return confirm('Do you want to logout?')">
+            <a class="nav-link" href="/admin/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="shop-menu-frame">
+        <div class="board">
+          <div class="shop-table">
+            <span class="new-shop-txt" style="display: block; margin-bottom: 30px">
+              VELOURA MENU
+            </span>
+            <table class="table table-bordered table-hover">
+              <thead class="thead-light">
+                <tr class="thead-light">
+                  <th scope="col">T/r</th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Product Category</th>
+                  <th scope="col">Product Tier</th>
+                  <th scope="col">Product TargetAudience</th>
+                  <th scope="col">Product Price in $</th>
+                  <th scope="col">Product Volume(ml)/Quantity(pcs)</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <% products.map(function(value, key) { %>
+                <tbody style="background: white">
+                  <td>
+                    <%= key + 1 %>
+                  </td>
+                  <td>
+                    <%= value.productName %>
+                  </td>
+                  <td>
+                    <%= value.productCategory %>
+                  </td>
+                  <td>
+                    <%= value.productTier %>
+                  </td>
+                  <td>
+                    <%= value.productTargetAudience || 'UNISEX' %>
+                  </td>
+                  <td>
+                    <%= value.productPrice %>
+                  </td>
+                  <td>
+                    <%= value.productVolumeMl ? value.productVolumeMl + ' ml' : (value.productQuantity ?
+                      value.productQuantity + ' pcs' : 'N/A' ) %>
+                  </td>
+                  <td>
+                    <select class="spec-select new-product-status" id="<%= value._id %>">
+                      <option value="PAUSE" <%=value.productStatus==="PAUSE" ? "selected" : "" %>>PAUSE
+                      </option>
+                      <option value="PROCESS" <%=value.productStatus==="PROCESS" ? "selected" : "" %>>PROCESS
+                      </option>
+                      <option value="DELETE" <%=value.productStatus==="DELETE" ? "selected" : "" %>
+                        >DELETE</option>
+                    </select>
+                  </td>
+                </tbody>
+                <% }) %>
+            </table>
+            <div class="long-input" style="align-items: flex-end; margin-bottom: 25px">
+              <button class="btn btn-primary" id="process-btn">
+                New Product
+              </button>
+            </div>
+          </div>
+
+          <form onsubmit="return validateForm()" action="/admin/product/create" method="POST" class="shop-container"
+            enctype="multipart/form-data">
+            <div class="long-input" style="display: flex; align-items: center">
+              <span class="new-shop-txt">NEW PRODUCT DETAIL</span>
+            </div>
+
+            <div class="login-input-frame">
+              <div class="long-input">
+                <label>Product Name</label>
+                <input type="text" placeholder="Name" name="productName" class="product-name" />
+              </div>
+              <input name="productStatus" value="PAUSE" class="product-status" hidden />
+            </div>
+
+            <div class="half-input-frame">
+              <div class="half-input">
+                <label>Product Price</label>
+                <input type="number" placeholder="Price" name="productPrice" class="product-price" />
+              </div>
+
+              <div class="half-input">
+                <label>Product Category</label>
+                <select class="product-category" name="productCategory">
+                  <option value="PERFUME" selected>PERFUME</option>
+                  <option value="EAU_DE_TOILETTE">EAU DE TOILETTE</option>
+                  <option value="GIFT_SET">GIFT SET</option>
+                  <option value="ACCESSORY">ACCESSORY</option>
+                  <option value="BODY_PRODUCT">BODY PRODUCT</option>
+                </select>
+              </div>
+
+              <div class="half-input">
+                <label>Product Tier</label>
+                <select class="product-tier" name="productTier">
+                  <option value="BASIC">BASIC</option>
+                  <option value="STANDARD" selected>STANDARD</option>
+                  <option value="PREMIUM">PREMIUM</option>
+                  <option value="PACKAGE">PACKAGE</option>
+                </select>
+              </div>
+
+              <div class="half-input">
+                <label>Product TargetAudience</label>
+                <select class="product-targetAudience" name="productTargetAudience">
+                  <option value="MEN">MEN</option>
+                  <option value="WOMEN">WOMEN</option>
+                  <option value="UNISEX" selected>UNISEX</option>
+                </select>
+              </div>
+
+              <div class="half-input" id="volume-container">
+                <label value="volume" checked> Product Volume (ml)</label>
+                <select name="productVolumeMl">
+                  <option value="30">30 ml</option>
+                  <option value="50">50 ml</option>
+                  <option value="75">75 ml</option>
+                  <option value="100">100 ml</option>
+                  <option value="150">150 ml</option>
+                </select>
+              </div>
+
+              <div class="half-input" id="quantity-container" style="display: none;">
+                <label value="quantity"> Product Quantity (pcs)</label>
+                <input type="number" name="productQuantity" placeholder="Quantity" min="1" />
+              </div>
+            </div>
+
+            <div class="long-input">
+              <label>Product Description</label>
+              <textarea name="productDesc" class="product-desc"></textarea>
+            </div>
+            <div class="img-frame">
+              <label>Product Images</label>
+              <div class="media-frame">
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="1" id="image-section-1" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-one"
+                    required
+                    onchange="previewFileHandler(this, 1)"
+                  />
+                </div>
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="2" id="image-section-2" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-two"
+                    onchange="previewFileHandler(this, 2)"
+                  />
+                </div>
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="3" id="image-section-3" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-three"
+                    onchange="previewFileHandler(this, 3)"
+                  />
+                </div>
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="4" id="image-section-4" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-four"
+                    onchange="previewFileHandler(this, 4)"
+                  />
+                </div>
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="5" id="image-section-5" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-five"
+                    onchange="previewFileHandler(this, 5)"
+                  />
+                </div>
+              </div>
+            </div>
+            
+
+            <div class="operation-buttons">
+              <button class="btn btn-danger" id="cancel-btn">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="create-btn">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/js/products.js"></script>
+  </body>
+
+  <%- include('includes/footer') %>

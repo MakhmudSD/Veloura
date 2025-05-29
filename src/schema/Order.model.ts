@@ -18,7 +18,11 @@ const orderSchema = new Schema(
     orderStatus: {
       type: String,
       enum: Object.values(OrderStatus),
+<<<<<<< HEAD
       default: OrderStatus.PROCESS,
+=======
+      default: OrderStatus.PAUSE,
+>>>>>>> 78b39a4 (feat: updates made)
       required: true,
       trim: true,
     },

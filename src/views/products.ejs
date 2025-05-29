@@ -71,8 +71,13 @@
                       </option>
                       <option value="PROCESS" <%=value.productStatus==="PROCESS" ? "selected" : "" %>>PROCESS
                       </option>
+<<<<<<< HEAD
                       <option value="FINISH" <%=value.productStatus==="FINISH" ? "selected" : "" %>
                         >FINISH</option>
+=======
+                      <option value="DELETE" <%=value.productStatus==="DELETE" ? "selected" : "" %>
+                        >DELETE</option>
+>>>>>>> 78b39a4 (feat: updates made)
                     </select>
                   </td>
                 </tbody>
@@ -96,7 +101,11 @@
                 <label>Product Name</label>
                 <input type="text" placeholder="Name" name="productName" class="product-name" />
               </div>
+<<<<<<< HEAD
               <input name="productStatus" value="AVAILABLE" class="product-status" hidden />
+=======
+              <input name="productStatus" value="PAUSE" class="product-status" hidden />
+>>>>>>> 78b39a4 (feat: updates made)
             </div>
 
             <div class="half-input-frame">
@@ -136,7 +145,11 @@
               </div>
 
               <div class="half-input" id="volume-container">
+<<<<<<< HEAD
                 <label><input type="radio" name="sizeType" value="volume" checked> Product Volume (ml)</label>
+=======
+                <label value="volume" checked> Product Volume (ml)</label>
+>>>>>>> 78b39a4 (feat: updates made)
                 <select name="productVolumeMl">
                   <option value="30">30 ml</option>
                   <option value="50">50 ml</option>
@@ -147,6 +160,7 @@
               </div>
 
               <div class="half-input" id="quantity-container" style="display: none;">
+<<<<<<< HEAD
                 <label><input type="radio" name="sizeType" value="quantity"> Product Quantity (pcs)</label>
                 <input type="number" name="productQuantity" placeholder="Quantity" min="1" />
               </div>
@@ -160,18 +174,27 @@
                   <option value="SET">SET</option>
                 </select>
               </div>
+=======
+                <label value="quantity"> Product Quantity (pcs)</label>
+                <input type="number" name="productQuantity" placeholder="Quantity" min="1" />
+              </div>
+>>>>>>> 78b39a4 (feat: updates made)
             </div>
 
             <div class="long-input">
               <label>Product Description</label>
               <textarea name="productDesc" class="product-desc"></textarea>
             </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 78b39a4 (feat: updates made)
             <div class="img-frame">
               <label>Product Images</label>
               <div class="media-frame">
                 <div class="upload-img-box">
                   <img src="/img/upload.svg" class="1" id="image-section-1" />
+<<<<<<< HEAD
                 </div>
                 <input type="file" id="file-1" name="productImages" class="image-one" required
                   onchange="previewFileHandler(this, 1)" />
@@ -201,6 +224,55 @@
                   onchange="previewFileHandler(this, 5)" />
               </div>
             </div>
+=======
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-one"
+                    required
+                    onchange="previewFileHandler(this, 1)"
+                  />
+                </div>
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="2" id="image-section-2" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-two"
+                    onchange="previewFileHandler(this, 2)"
+                  />
+                </div>
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="3" id="image-section-3" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-three"
+                    onchange="previewFileHandler(this, 3)"
+                  />
+                </div>
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="4" id="image-section-4" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-four"
+                    onchange="previewFileHandler(this, 4)"
+                  />
+                </div>
+                <div class="upload-img-box">
+                  <img src="/img/upload.svg" class="5" id="image-section-5" />
+                  <input
+                    type="file"
+                    name="productImages"
+                    class="image-five"
+                    onchange="previewFileHandler(this, 5)"
+                  />
+                </div>
+              </div>
+            </div>
+            
+>>>>>>> 78b39a4 (feat: updates made)
 
             <div class="operation-buttons">
               <button class="btn btn-danger" id="cancel-btn">Cancel</button>

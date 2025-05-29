@@ -98,6 +98,10 @@ class ProductService {
 
   public async createNewProduct(input: ProductInput): Promise<Product> {
     try {
+<<<<<<< HEAD
+=======
+      console.log("input:", input)
+>>>>>>> 78b39a4 (feat: updates made)
       const result = await this.productModel.create(input);
       return result as unknown as Product;
     } catch (err) {
