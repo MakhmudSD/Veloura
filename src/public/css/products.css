@@ -32,7 +32,7 @@ body {
   z-index: -1;
   width: 100vw;
   height: 100vh;
-  background-color: #121212;
+  background-color: #87633d;
 }
 
 .products-container {
@@ -224,10 +224,7 @@ body {
 }
 
 .products-container .img-frame .media-frame .upload-img-box {
-<<<<<<< HEAD
-=======
   position: relative; /* Add this */
->>>>>>> 78b39a4 (feat: updates made)
   width: 180px;
   height: 180px;
   border: 1px solid #D4AF37;
@@ -258,20 +255,6 @@ body {
   transform: scale(1.05);
 }
 
-<<<<<<< HEAD
-.products-container .img-frame .media-frame input[type="file"] {
-  margin-bottom: 20px;
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 8px;
-  border: 1px solid #D4AF37;
-  background-color: #FDF6E3;
-  color: #000;
-  cursor: pointer;
-  width: 180px;
-  /* same width as image box for alignment */
-  box-sizing: border-box;
-=======
 .products-container .img-frame .media-frame .upload-img-box input[type="file"] {
   position: absolute;  /* absolute inside relative box */
   top: 0;
@@ -284,7 +267,6 @@ body {
   border-radius: 12px;
   background: transparent;
   z-index: 10; /* Make sure input is above img */
->>>>>>> 78b39a4 (feat: updates made)
 }
 
 /* Toggle button */

@@ -13,7 +13,7 @@ import { shapeIntoMongooseObjectId } from "../libs/config";
 import { HttpCode, Message } from "../libs/Errors";
 import Errors from "../libs/Errors";
 import { ObjectId } from "mongoose";
-import {OrderStatus}  from "../libs/enums/orders.enum";
+import { OrderStatus } from "../libs/enums/orders.enum";
 
 class OrderService {
   private readonly orderModel;
@@ -92,7 +92,8 @@ class OrderService {
         },
       ])
       .exec();
-    if (!result || result.length === 0) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    if (!result || result.length === 0)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result;
   }
 
@@ -119,7 +120,5 @@ class OrderService {
     return result as unknown as Order;
   }
 }
-
-
 
 export default OrderService;

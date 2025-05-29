@@ -11,11 +11,7 @@ const productSchema = new Schema(
     productStatus: {
       type: String,
       enum: Object.values(ProductStatus),
-<<<<<<< HEAD
-      default: ProductStatus.PROCESS,
-=======
       default: ProductStatus.PAUSE,
->>>>>>> 78b39a4 (feat: updates made)
     },
 
     productName: {
