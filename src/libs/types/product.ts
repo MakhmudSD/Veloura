@@ -4,6 +4,7 @@ import {
   ProductTier,
   ProductStatus,
   ProductTargetAudience,
+  ProductVolume,
 } from "../enums/products.enum";
 
 export interface Product {
@@ -27,6 +28,8 @@ export interface ProductInquiry {
   page: number;
   limit: number;
   productCategory?: ProductCategory;
+  productVolume?: ProductVolume;
+  productGender?: ProductTargetAudience
   search?: string;
 }
 

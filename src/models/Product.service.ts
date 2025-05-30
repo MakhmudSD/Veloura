@@ -1,3 +1,4 @@
+import { ProductVolume } from "./../libs/enums/products.enum";
 import {
   ProductInput,
   ProductInquiry,
@@ -25,7 +26,6 @@ class ProductService {
   }
 
   /** SPA */
-
   public async getProducts(inquiry: ProductInquiry): Promise<Product[]> {
     console.log("inquiry:", inquiry);
 
@@ -33,8 +33,14 @@ class ProductService {
 
     if (inquiry.productCategory)
       match.productCategory = inquiry.productCategory;
+
+    if (inquiry.productGender) match.gender = inquiry.productGender;
+
+    if (inquiry.productVolume) match.volume = inquiry.productVolume;
+
     if (inquiry.search)
       match.productName = { $regex: new RegExp(inquiry.search, "i") };
+
     const sort: T =
       inquiry.order === "productPrice"
         ? { [inquiry.order]: 1 }
@@ -48,6 +54,7 @@ class ProductService {
         { $limit: inquiry.limit * 1 },
       ])
       .exec();
+
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result;
   }
@@ -98,7 +105,7 @@ class ProductService {
 
   public async createNewProduct(input: ProductInput): Promise<Product> {
     try {
-      console.log("input:", input)
+      console.log("input:", input);
       const result = await this.productModel.create(input);
       return result as unknown as Product;
     } catch (err) {
