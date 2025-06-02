@@ -19,13 +19,11 @@ const orderSchema = new Schema(
       type: String,
       enum: Object.values(OrderStatus),
       default: OrderStatus.PAUSE,
-      required: true,
       trim: true,
     },
 
     memberId: {
       type: Schema.Types.ObjectId,
-      required: true,
       ref: "Member",
     },
   },

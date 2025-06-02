@@ -90,6 +90,14 @@ class OrderService {
             as: "orderItems",
           },
         },
+        {
+          $lookup: {
+            from: "products",
+            localField: "orderItems.productId",
+            foreignField: "_id",
+            as: "productData",
+          },
+        },
       ])
       .exec();
     if (!result || result.length === 0)

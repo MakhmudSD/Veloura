@@ -1,20 +1,20 @@
 import dotenv from "dotenv";
-dotenv.config()
+dotenv.config();
 
-import mongoose, { mongo } from "mongoose";
-import app from "./app"
+import mongoose from "mongoose";
+import app from "./app";
 
-mongoose.set('strictQuery', true);
+
 mongoose
   .connect(process.env.MONGO_URL as string, {})
   .then((data) => {
-    console.log("MongoDB connected successfully");
+    console.log("MongoDB Connection succeed");
     const PORT = process.env.PORT;
     app.listen(PORT, function () {
-      console.info(`The app is running successfully on ${PORT}`);
-      console.info(`Admin Project is on http://localhost:${PORT}/admin \n`);
+      console.info(`This server is running successfully on port: ${PORT}`);
+      console.info(`Admin Project on http://localhost:${PORT}/admin \n`);
     });
   })
   .catch((err) => {
-    console.info("Error on MongoDB connection", err);
+    console.log("ERROR on Connection to MongoDB", err);
   });

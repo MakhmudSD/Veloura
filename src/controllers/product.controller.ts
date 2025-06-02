@@ -1,4 +1,8 @@
-import { ProductCategory } from "./../libs/enums/products.enum";
+import {
+  ProductCategory,
+  ProductTargetAudience,
+  ProductVolume,
+} from "./../libs/enums/products.enum";
 import { AdminRequest, ExtendedRequest } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
@@ -13,16 +17,41 @@ const productController: T = {};
 productController.getProducts = async (req: Request, res: Response) => {
   try {
     console.log("getProducts here");
-    const { order, page, limit, productCategory, search } = req.query;
+    const {
+      order,
+      page,
+      limit,
+      productCategory,
+      search,
+      productGender,
+      productVolume,
+    } = req.query;
+
     const inquiry: ProductInquiry = {
       order: String(order || "asc"),
       page: Number.isNaN(Number(page)) ? 1 : Number(page),
       limit: Number.isNaN(Number(limit)) ? 10 : Number(limit),
     };
-    if (productCategory) {
+
+    if (productCategory)
       inquiry.productCategory = productCategory as ProductCategory;
-    }
     if (search) inquiry.search = String(search);
+    if (
+      productGender &&
+      Object.values(ProductTargetAudience).includes(
+        productGender as ProductTargetAudience
+      )
+    ) {
+      inquiry.productGender = productGender as ProductTargetAudience;
+    }
+    if (
+      productVolume &&
+      Object.values(ProductVolume).includes(
+        productVolume as unknown as ProductVolume
+      )
+    ) {
+      inquiry.productVolume = productVolume as unknown as ProductVolume;
+    }
     const result = await productService.getProducts(inquiry);
     res.status(HttpCode.OK).json(result);
   } catch (err) {
