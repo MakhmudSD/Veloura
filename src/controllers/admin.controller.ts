@@ -99,13 +99,13 @@ adminController.logout = async (req: AdminRequest, res: Response) => {
 };
 
 adminController.getUsers = async (req: Request, res: Response) => {
-    try {
-      console.log("getUsers");
-      const result = await memberService.getUsers();
-      res.render("users", { users: result });
-    } catch (err) {
-      console.log("ERROR on getUsers");
-      res.status(500).send("Server error");
+  try {
+    console.log("getUsers");
+    const result = await memberService.getUsers();
+    res.render("users", { users: result });
+  } catch (err) {
+    console.log("ERROR on getUsers");
+    res.status(500).send("Server error");
   }
 };
 

@@ -99,7 +99,7 @@ class MemberService {
 
   public async addUserPoint(member: Member, point: number): Promise<Member> {
     const memberId = shapeIntoMongooseObjectId(member._id);
-    const result =  await this.memberModel
+    const result = await this.memberModel
       .findOneAndUpdate(
         {
           _id: memberId,
@@ -110,7 +110,7 @@ class MemberService {
         { new: true }
       )
       .exec();
-      return result as unknown as Member
+    return result as unknown as Member;
   }
 
   public async getAdmin(): Promise<Member> {
@@ -176,7 +176,8 @@ class MemberService {
     const result = await this.memberModel
       .find({ memberType: MemberType.USER })
       .exec();
-    if (!result || result.length === 0) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    if (!result || result.length === 0)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result as unknown as Member[];
   }
 

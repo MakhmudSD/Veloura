@@ -1,8 +1,7 @@
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { AUTH_TIMER } from "../libs/config";
 import { Member } from "../libs/types/member";
-import jwt from "jsonwebtoken"
-
+import jwt from "jsonwebtoken";
 
 class AuthService {
   private readonly secretToken;
@@ -29,7 +28,6 @@ class AuthService {
     });
   }
 
-
   public async checkAuth(token: string): Promise<Member> {
     try {
       const result = (await jwt.verify(token, this.secretToken)) as Member;
@@ -41,4 +39,4 @@ class AuthService {
   }
 }
 
-export default AuthService
+export default AuthService;

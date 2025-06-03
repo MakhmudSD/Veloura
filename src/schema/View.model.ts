@@ -16,7 +16,7 @@ const viewSchema = new Schema(
     },
 
     viewRefId: {
-      type: Schema.Types.ObjectId, // e.g., productId, memberId, etc.
+      type: Schema.Types.ObjectId,
       required: true,
     },
   },

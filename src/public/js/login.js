@@ -6,7 +6,7 @@ function createParticle() {
   particle.style.left = `${Math.random() * 100}vw`;
   particle.style.top = `${100 + Math.random() * 20}vh`;
 
-  const size = Math.random() * 4 + 18; 
+  const size = Math.random() * 4 + 18;
   particle.style.width = `${size}px`;
   particle.style.height = `${size}px`;
 
@@ -21,11 +21,11 @@ function createParticle() {
       { value: 0, duration: 4000 },
     ],
     easing: "easeOutQuad",
-    duration: 6000 + Math.random() * 3000, 
+    duration: 6000 + Math.random() * 3000,
     complete: () => {
       particle.remove();
     },
   });
 }
 
-setInterval(createParticle, 50); 
+setInterval(createParticle, 50);

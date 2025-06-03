@@ -13,5 +13,5 @@ export interface View {
 export interface ViewInput {
   memberId: ObjectId;
   viewRefId: ObjectId;
-  viewGroup: ViewGroup
+  viewGroup: ViewGroup;
 }

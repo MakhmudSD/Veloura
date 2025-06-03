@@ -138,7 +138,6 @@ body {
   background-color: #222;
   object-fit: cover;
   overflow: hidden;
-  /* important to prevent overflow when zooming */
   transition: transform 0.5s ease-in-out;
 }
 

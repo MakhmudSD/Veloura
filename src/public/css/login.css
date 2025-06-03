@@ -26,7 +26,7 @@ body {
   background: transparent;
 }
 
- #particles-container {
+#particles-container {
   position: fixed;
   pointer-events: none;
   top: 0;
@@ -48,7 +48,7 @@ body {
   border-radius: 50%;
   opacity: 0.6;
   pointer-events: none;
-  background-color: rgba(212, 175, 55, 0.25); /* softer gold */
+  background-color: rgba(212, 175, 55, 0.25);
   mix-blend-mode: screen;
   transition: opacity 0.5s ease;
 }

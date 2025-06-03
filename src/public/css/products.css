@@ -207,7 +207,6 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #D4AF37;
-  /* bright gold for dark background */
   margin-bottom: 20px;
   text-align: center;
 }
@@ -218,13 +217,12 @@ body {
   align-items: center;
   justify-content: space-around;
   gap: 20px;
-  /* space between uploaders */
   flex-wrap: wrap;
   margin-top: 10px;
 }
 
 .products-container .img-frame .media-frame .upload-img-box {
-  position: relative; /* Add this */
+  position: relative;
   width: 180px;
   height: 180px;
   border: 1px solid #D4AF37;
@@ -256,7 +254,7 @@ body {
 }
 
 .products-container .img-frame .media-frame .upload-img-box input[type="file"] {
-  position: absolute;  /* absolute inside relative box */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -266,7 +264,7 @@ body {
   border: none;
   border-radius: 12px;
   background: transparent;
-  z-index: 10; /* Make sure input is above img */
+  z-index: 10;
 }
 
 /* Toggle button */

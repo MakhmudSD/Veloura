@@ -1,10 +1,13 @@
 .home-container {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   background: none;
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +25,8 @@
 
 .home-container .animation-frame .perfume-video {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
@@ -33,8 +37,8 @@
 }
 
 .home-container .navigation-menu {
-  position: absolute; /* inside animation frame */
-  top: 20px; /* space from top */
+  position: absolute;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -62,15 +66,14 @@
 }
 
 .home-container .navigation-menu .nav-item a {
-  font-family: 'Playfair Display', serif; /* or 'Parisienne', cursive */
-  /* optional styling for French vibe */
-  font-style: italic; 
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
   font-size: 50px;
   font-weight: 600;
   letter-spacing: 0.05em;
   margin-top: -20px;
   margin-left: 20px;
-  color: #e3c08d; /* your existing color */
+  color: #e3c08d;
   text-decoration: none;
 }
 

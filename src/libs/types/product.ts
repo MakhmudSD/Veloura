@@ -13,13 +13,13 @@ export interface Product {
   productCategory: ProductCategory;
   productName: string;
   productPrice: number;
-  productTier: ProductTier; // renamed for clarity
+  productTier: ProductTier;
   productQuantity?: number;
   productDesc?: string;
   productImages: string[];
   productViews: number;
-  productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
-  productVolumeMl?: number; // size in milliliters
+  productFragranceNotes?: string[];
+  productVolumeMl?: number;
   productTargetAudience?: ProductTargetAudience;
 }
 
@@ -29,7 +29,7 @@ export interface ProductInquiry {
   limit: number;
   productCategory?: ProductCategory;
   productVolume?: ProductVolume;
-  productGender?: ProductTargetAudience
+  productGender?: ProductTargetAudience;
   search?: string;
 }
 
@@ -43,15 +43,15 @@ export interface ProductInput {
   productDesc?: string;
   productImages: string[];
   productViews: number;
-  productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
-  productVolumeMl?: number; // size in milliliters
+  productFragranceNotes?: string[];
+  productVolumeMl?: number;
   productTargetAudience?: ProductTargetAudience;
 }
 
 export interface ProductUpdateInput {
   _id: ObjectId;
   productStatus?: ProductStatus;
-  productCategory?: ProductCategory; // fixed typo here
+  productCategory?: ProductCategory;
   productName?: string;
   productPrice?: number;
   productTier?: ProductTier;
@@ -59,7 +59,7 @@ export interface ProductUpdateInput {
   productDesc?: string;
   productImages?: string[];
   productViews?: number;
-  productFragranceNotes?: string[]; // e.g., ["floral", "citrus", "woody"]
-  productVolumeMl?: number; // size in milliliters
+  productFragranceNotes?: string[];
+  productVolumeMl?: number;
   productTargetAudience?: ProductTargetAudience;
 }

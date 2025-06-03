@@ -2,11 +2,10 @@ console.log("Users frontend javascript file");
 
 $(function () {
   $(".member-status").on("change", function (e) {
-    const id = e.target.id; // targeted id in the event
+    const id = e.target.id;
 
     const memberStatus = $(`#${id}.member-status`).val();
 
-    //TODO: axios updateChosenUser
     axios
       .post("/admin/user/edit", {
         _id: id,
@@ -14,7 +13,7 @@ $(function () {
       })
       .then((response) => {
         console.log("response:", response);
-        const result = response.data; //data is the object sent by backend
+        const result = response.data;
         if (result.data) {
           console.log("User updated");
           $(".member-status").blur();

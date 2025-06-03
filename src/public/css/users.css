@@ -22,9 +22,7 @@ body {
 .users-container .floating-circles {
   position: absolute;
   inset: 0;
-  /* top:0; right:0; bottom:0; left:0 */
   pointer-events: none;
-  /* so clicks pass through */
   z-index: 0;
 }
 
@@ -49,9 +47,7 @@ body {
   position: absolute;
   border-radius: 50%;
   opacity: 0.25;
-  /* increased opacity */
   background: rgba(193, 154, 107, 0.4);
-  /* a bit more opaque */
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -60,24 +56,20 @@ body {
 
 .users-container::before {
   width: 350px;
-  /* slightly bigger */
   height: 350px;
   top: 10%;
   left: -175px;
   animation-name: floatLeftRight;
   animation-duration: 12s;
-  /* faster */
 }
 
 .users-container::after {
   width: 250px;
-  /* slightly bigger */
   height: 250px;
   bottom: 15%;
   right: -125px;
   animation-name: floatRightLeft;
   animation-duration: 15s;
-  /* faster */
 }
 
 /* Navigation menu styles */

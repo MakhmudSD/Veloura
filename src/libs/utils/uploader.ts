@@ -18,7 +18,6 @@ function getTargetImageStorage(address: any) {
 const makeUploader = (address: any) => {
   const product_storage = getTargetImageStorage(address);
   return multer({ storage: product_storage });
-
 };
 
 export default makeUploader;

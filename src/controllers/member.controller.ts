@@ -17,43 +17,42 @@ const memberService = new MemberService();
 const memberController: T = {};
 
 memberController.signup = async (req: Request, res: Response) => {
+  try {
+    console.log("signup here!");
+    console.log("body", req.body);
 
-    try {
-      console.log("signup here!");
-      console.log("body", req.body);
+    const input: MemberInput = req.body,
+      result: Member = await memberService.signup(input);
+    const token = await authService.createToken(result);
 
-      const input: MemberInput = req.body,
-        result: Member = await memberService.signup(input);
-      const token = await authService.createToken(result);
-
-      res.cookie("accessToken", token, {
-        maxAge: AUTH_TIMER * 3600 * 1000,
-        httpOnly: false,
-      });
-      res.status(HttpCode.CREATED).json({ member: result, accessToken: token });
-    } catch (err) {
-      console.log("ERROR on Signup page", err);
-      if (err instanceof Errors) res.status(err.code).json(err);
-      else res.status(Errors.standard.code).json(Errors.standard);
-    }
+    res.cookie("accessToken", token, {
+      maxAge: AUTH_TIMER * 3600 * 1000,
+      httpOnly: false,
+    });
+    res.status(HttpCode.CREATED).json({ member: result, accessToken: token });
+  } catch (err) {
+    console.log("ERROR on Signup page", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
+  }
 };
 
 memberController.login = async (req: Request, res: Response) => {
-    try {
-      console.log("login here");
-      const input: LoginInput = req.body,
-        result: Member = await memberService.login(input);
-      const token = await authService.createToken(result);
+  try {
+    console.log("login here");
+    const input: LoginInput = req.body,
+      result: Member = await memberService.login(input);
+    const token = await authService.createToken(result);
 
-      res.cookie("accessToken", token, {
-        maxAge: AUTH_TIMER * 3600 * 1000,
-        httpOnly: false,
-      });
-      res.status(HttpCode.OK).json({ member: result, accessToken: token });
-    } catch (err) {
-      console.log("ERROR on Login page", err);
-      if (err instanceof Errors) res.status(err.code).json(err);
-      else res.status(Errors.standard.code).json(Errors.standard);
+    res.cookie("accessToken", token, {
+      maxAge: AUTH_TIMER * 3600 * 1000,
+      httpOnly: false,
+    });
+    res.status(HttpCode.OK).json({ member: result, accessToken: token });
+  } catch (err) {
+    console.log("ERROR on Login page", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standard.code).json(Errors.standard);
   }
 };
 

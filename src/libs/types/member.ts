@@ -58,10 +58,9 @@ export interface AdminRequest extends Request {
 
 export interface ExtendedRequest extends Request {
   query: any;
-  params: { id: any; };
+  params: { id: any };
   cookies: any;
   member: Member;
   file: Express.Multer.File;
   files: Express.Multer.File[];
 }
-
