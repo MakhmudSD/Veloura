@@ -48,16 +48,18 @@ body {
 }
 
 .products-container .navigation-menu {
-  position: absolute;
+  position: relative;
   top: 30px;
   left: 50%;
   transform: translateX(-50%);
   margin-top: 0;
   z-index: 10;
   width: auto;
+  margin-top: -123px;
+  margin-bottom: 20px;
   padding: 10px 20px;
   border-radius: 8px;
-  font-size: 40px;
+  font-size: 30px;
   font-family: monospace;
   color: #efefee;
   display: flex;
@@ -83,8 +85,6 @@ body {
   font-size: 50px;
   font-weight: 600;
   letter-spacing: 0.05em;
-  margin-top: -70px;
-  margin-left: 20px;
   color: #e3c08d;
   text-decoration: none;
   transition: color 0.3s ease;

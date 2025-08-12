@@ -95,11 +95,10 @@ body {
 .users-container .nav-item a {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 600;
   letter-spacing: 0.05em;
-  margin-top: -70px;
-  margin-left: 20px;
+  margin-top: -50px;
   color: #e3c08d;
   text-decoration: none;
   transition: color 0.3s ease;

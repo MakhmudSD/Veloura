@@ -45,7 +45,7 @@
   width: auto;
   padding: 10px 20px;
   border-radius: 8px;
-  font-size: 40px;
+  font-size: 30px;
   font-family: monospace;
   color: #efefee;
   display: flex;
@@ -68,11 +68,10 @@
 .home-container .navigation-menu .nav-item a {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 600;
   letter-spacing: 0.05em;
   margin-top: -20px;
-  margin-left: 20px;
   color: #e3c08d;
   text-decoration: none;
 }
