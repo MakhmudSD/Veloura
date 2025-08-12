@@ -9,6 +9,8 @@ import ConnectMongoDB from "connect-mongodb-session";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import { T } from "./libs/types/common";
+import { Server as SocketIOServer } from "socket.io";
+import http from "http";
 
 const MongDbStore = ConnectMongoDB(session);
 const store = new MongDbStore({
@@ -49,4 +51,22 @@ app.set("view engine", "ejs");
 app.use("/", router);
 app.use("/admin", routerAdmin);
 
-export default app;
+const server = http.createServer(app);
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: true,
+    credentials: true,
+  },
+});
+
+let summaryClient = 0;
+io.on("connection", (socket) => {
+  console.log("New client connected");
+  summaryClient++;
+  console.log(`Total clients connected: ${summaryClient}`);
+  socket.on("disconnect", () => {
+    summaryClient--;
+    console.log("Client disconnected");
+  });
+});
+export default server;
