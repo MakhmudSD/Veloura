@@ -1,9 +1,15 @@
+import { registerEnumType } from '@nestjs/graphql';
+
 export enum ProductTier {
   BASIC = "BASIC",
   STANDARD = "STANDARD",
   PREMIUM = "PREMIUM",
   PACKAGE = "PACKAGE",
 }
+
+registerEnumType(ProductTier, {
+  name: 'ProductTier',
+});
 
 export enum ProductVolume {
   THIRTY_ML = 30,
@@ -13,11 +19,19 @@ export enum ProductVolume {
   ONE_FIFTY_ML = 150,
 }
 
+registerEnumType(ProductVolume, {
+  name: 'ProductVolume',
+});
+
 export enum ProductStatus {
   PAUSE = "PAUSE",
   PROCESS = "PROCESS",
   DELETE = "DELETE",
 }
+
+registerEnumType(ProductStatus, {
+  name: 'ProductStatus',
+});
 
 export enum ProductTargetAudience {
   MEN = "MEN",
@@ -25,11 +39,23 @@ export enum ProductTargetAudience {
   UNISEX = "UNISEX",
 }
 
+registerEnumType(ProductTargetAudience, {
+  name: 'ProductTargetAudience',
+});
+
 export enum ProductCategory {
-  ALL = "ALL",
-  PERFUME = "PERFUME",
-  EAU_DE_TOILETTE = "EAU_DE_TOILETTE",
-  GIFT_SET = "GIFT_SET",
-  ACCESSORY = "ACCESSORY",
-  BODY_PRODUCT = "BODY_PRODUCT",
+  SUPPLEMENTS = "SUPPLEMENTS",
+  VITAMINS = "VITAMINS",
+  ORGANIC_FOOD = "ORGANIC_FOOD",
+  FITNESS_EQUIPMENT = "FITNESS_EQUIPMENT",
+  SKINCARE = "SKINCARE",
+  HERBAL_REMEDIES = "HERBAL_REMEDIES",
+  PROTEIN_POWDER = "PROTEIN_POWDER",
+  SUPERFOODS = "SUPERFOODS",
+  WELLNESS_ACCESSORIES = "WELLNESS_ACCESSORIES",
+  HEALTH_BOOKS = "HEALTH_BOOKS",
 }
+
+registerEnumType(ProductCategory, {
+  name: 'ProductCategory',
+});

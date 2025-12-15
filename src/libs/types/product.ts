@@ -1,4 +1,3 @@
-import mongoose, { ObjectId } from "mongoose";
 import {
   ProductCategory,
   ProductTier,
@@ -8,7 +7,7 @@ import {
 } from "../enums/products.enum";
 
 export interface Product {
-  _id: ObjectId;
+  _id: string;
   productStatus: ProductStatus;
   productCategory: ProductCategory;
   productName: string;
@@ -49,7 +48,7 @@ export interface ProductInput {
 }
 
 export interface ProductUpdateInput {
-  _id: ObjectId;
+  _id: string;
   productStatus?: ProductStatus;
   productCategory?: ProductCategory;
   productName?: string;
