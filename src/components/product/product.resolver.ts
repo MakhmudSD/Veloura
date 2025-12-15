@@ -31,5 +31,15 @@ export class ProductResolver {
 	async updateProduct(@Args('id') id: string, @Args('input') input: ProductUpdateInput): Promise<Product> {
 		return this.productService.updateProduct(id, input);
 	}
+
+	@Query(() => [Product])
+	async getTopProducts(@Args('limit', { nullable: true }) limit?: number): Promise<Product[]> {
+		return this.productService.getTopProducts(limit || 10);
+	}
+
+	@Query(() => [Product])
+	async getPopularProducts(@Args('limit', { nullable: true }) limit?: number): Promise<Product[]> {
+		return this.productService.getPopularProducts(limit || 10);
+	}
 }
 

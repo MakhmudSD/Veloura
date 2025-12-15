@@ -51,5 +51,21 @@ export class ProductService {
 		if (!result) throw new NotFoundException('Update failed');
 		return result;
 	}
+
+	async getTopProducts(limit: number = 10): Promise<Product[]> {
+		return this.productRepository.find({
+			where: { productStatus: ProductStatus.PROCESS },
+			order: { productViews: 'DESC' },
+			take: limit,
+		});
+	}
+
+	async getPopularProducts(limit: number = 10): Promise<Product[]> {
+		return this.productRepository.find({
+			where: { productStatus: ProductStatus.PROCESS },
+			order: { productViews: 'DESC', createdAt: 'DESC' },
+			take: limit,
+		});
+	}
 }
 

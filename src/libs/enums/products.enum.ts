@@ -54,6 +54,10 @@ export enum ProductCategory {
   SUPERFOODS = "SUPERFOODS",
   WELLNESS_ACCESSORIES = "WELLNESS_ACCESSORIES",
   HEALTH_BOOKS = "HEALTH_BOOKS",
+  LIQUIDS = "LIQUIDS",
+  GINSENG = "GINSENG",
+  DRUGS = "DRUGS",
+  COSMETICS = "COSMETICS",
 }
 
 registerEnumType(ProductCategory, {

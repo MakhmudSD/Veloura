@@ -73,3 +73,12 @@ export class MemberUpdateInput {
 	memberImage?: string;
 }
 
+@InputType()
+export class OAuthLoginInput {
+	@Field()
+	token: string;
+
+	@Field()
+	provider: string;
+}
+

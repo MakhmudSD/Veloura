@@ -10,6 +10,8 @@ import { ViewModule } from './components/view/view.module';
 import { AuthModule } from './components/auth/auth.module';
 import { NoticeModule } from './components/notice/notice.module';
 import { ChatbotModule } from './components/chatbot/chatbot.module';
+import { CartModule } from './components/cart/cart.module';
+import { LikeModule } from './components/like/like.module';
 import { AppController } from './app.controller';
 
 @Module({
@@ -40,6 +42,8 @@ import { AppController } from './app.controller';
 		ViewModule,
 		NoticeModule,
 		ChatbotModule,
+		CartModule,
+		LikeModule,
 	],
 	controllers: [AppController],
 })

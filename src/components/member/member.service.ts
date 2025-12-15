@@ -81,5 +81,66 @@ export class MemberService {
 		member.memberPoints += point;
 		return this.memberRepository.save(member);
 	}
+
+	async oauthLogin(token: string, provider: string): Promise<Member & { accessToken: string }> {
+		let userInfo: any;
+
+		if (provider === 'google') {
+			userInfo = await this.verifyGoogleToken(token);
+		} else if (provider === 'kakao') {
+			userInfo = await this.verifyKakaoToken(token);
+		} else {
+			throw new BadRequestException('Invalid provider');
+		}
+
+		const email = userInfo.email || `${userInfo.id}@${provider}.com`;
+		let member = await this.memberRepository.findOne({
+			where: { memberEmail: email },
+		});
+
+		if (!member) {
+			member = this.memberRepository.create({
+				memberEmail: email,
+				memberNick: userInfo.name || userInfo.nickname || `user_${userInfo.id}`,
+				memberImage: userInfo.picture || userInfo.profile_image,
+				memberType: MemberType.USER,
+				memberStatus: MemberStatus.ACTIVE,
+			});
+			member = await this.memberRepository.save(member);
+		}
+
+		const accessToken = await this.authService.createToken(member);
+		return { ...member, accessToken };
+	}
+
+	private async verifyGoogleToken(token: string): Promise<any> {
+		try {
+			const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
+			if (!response.ok) throw new Error('Invalid token');
+			return await response.json();
+		} catch (error) {
+			throw new UnauthorizedException('Invalid Google token');
+		}
+	}
+
+	private async verifyKakaoToken(token: string): Promise<any> {
+		try {
+			const response = await fetch('https://kapi.kakao.com/v2/user/me', {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			if (!response.ok) throw new Error('Invalid token');
+			const data = await response.json();
+			return {
+				id: data.id,
+				email: data.kakao_account?.email,
+				name: data.kakao_account?.profile?.nickname,
+				nickname: data.kakao_account?.profile?.nickname,
+				picture: data.kakao_account?.profile?.profile_image_url,
+				profile_image: data.kakao_account?.profile?.profile_image_url,
+			};
+		} catch (error) {
+			throw new UnauthorizedException('Invalid Kakao token');
+		}
+	}
 }
 
